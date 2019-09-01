@@ -1,0 +1,66 @@
+/* .box {
+    transition: box-shadow .3s;
+    width: 300px;
+    height: 500px;
+    margin: 50px;
+    border-radius:10px;
+    border: 1px solid #ccc;
+    background: #fff;
+    float: left;
+    
+  } */
+  .text-black-50:hover{
+      color: green;
+  }
+  .box:hover {
+    border: solid 1px #CCC;
+    -moz-box-shadow: 1px 1px 5px #999;
+    -webkit-box-shadow: 1px 1px 5px #999;
+        box-shadow: 1px 1px 5px #999; 
+  }
+.dtHorizontalExampleWrapper {
+    max-width: 600px;
+    margin: 0 auto;
+    }
+    #dtHorizontalExample th, td {
+    white-space: nowrap;
+    }
+    
+    table.dataTable thead .sorting:after,
+    table.dataTable thead .sorting:before,
+    table.dataTable thead .sorting_asc:after,
+    table.dataTable thead .sorting_asc:before,
+    table.dataTable thead .sorting_asc_disabled:after,
+    table.dataTable thead .sorting_asc_disabled:before,
+    table.dataTable thead .sorting_desc:after,
+    table.dataTable thead .sorting_desc:before,
+    table.dataTable thead .sorting_desc_disabled:after,
+    table.dataTable thead .sorting_desc_disabled:before {
+    bottom: .5em;
+    }
+
+.hover-card{
+    /* opacity: 0.6; */
+    transition: 1.0s;
+}
+
+.hover-card:hover {
+    opacity: 1;
+    background: skyblue;
+}
+
+body{
+    /* background-color: rgb(250, 255, 254); */
+    background-color: #fff;
+}
+
+footer{
+    /* position: absolute;
+    bottom: 0;
+    margin: 1em;
+    padding: 1em;
+    width: 80%;
+    flex: 0 0 auto; */
+    background-color: #304ffe;
+}
+
