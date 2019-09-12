@@ -4,9 +4,32 @@ class Home extends CI_Controller {
 
     public function index()
     {
-        $this->load->view('header');
+        $this->load->view('content/header');
         $this->load->view('home');
-        $this->load->view('footer');
+    }
+
+    public function lengan_panjang(){
+        $this->load->view('content/header');
+        $this->load->view('lengan_panjang');
+        $this->load->view('content/footer');
+    }
+
+    public function lengan_pendek(){
+        $this->load->view('content/header');
+        $this->load->view('lengan_pendek');
+        $this->load->view('content/footer');
+    }
+
+    public function hoodie(){
+        $this->load->view('content/header');
+        $this->load->view('hoodie');
+        $this->load->view('content/footer');
+    }
+
+    public function detail_product(){
+        $this->load->view('content/header');
+        $this->load->view('detail_product');
+        $this->load->view('content/footer');
     }
 
 }
