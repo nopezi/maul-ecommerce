@@ -29,7 +29,6 @@ class Home extends CI_Controller {
     public function detail_product(){
         $this->load->view('content/header');
         $this->load->view('frontend/detail_product');
-        $this->load->view('content/footer');
     }
 
 }
