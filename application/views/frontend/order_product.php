@@ -25,23 +25,41 @@
                         <th>Produk</th>
                         <td><?=$order['nama_produk']?></td>
                     </tr>
+                    <?php if(!empty($order['warna'])): ?>
                     <tr>
                         <th>Warna Produk</th>
                         <td><?=$order['warna']?></td>
                     </tr>
+                    <?php endif;?>
+                    <?php if(!empty($order['ukuran'])):?>
                     <tr>
                         <th>Ukuran Produk</th>
                         <td>
                             <?php $ukuran = explode("*", $order['ukuran']); echo $ukuran[1]; ?>
                         </td>
                     </tr>
+                    <?php endif;?>
                     <tr>
                         <th>Quantity</th>
                         <td><?=$order['jumlah']?></td>
                     </tr>
                     <tr>
                         <th>Harga</th>
-                        <td><?=$order['harga']?></td>
+                        <td>
+                            <?php
+                            if(!empty($order['harga_ukuran'])){
+                                $harga_ukuran = str_replace("Rp", "", $order['harga_ukuran']);
+                                $harga_ukuran = str_replace(",", "", $harga_ukuran);
+                                $harga_total  = $order['jumlah'] * $harga_ukuran;
+                                echo 'Rp '.number_format($harga_total);
+                            }else{ 
+                                $harga_ukuran = str_replace("Rp", "", $order['harga']);
+                                $harga_ukuran = str_replace(",", "", $harga_ukuran);
+                                $harga_total  = $order['jumlah'] * $harga_ukuran;
+                                echo 'Rp '.number_format($harga_total);
+                            }
+                            ?>
+                        </td>
                     </tr>
                 </table>
                 <?php

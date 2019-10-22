@@ -97,6 +97,7 @@ class Home extends CI_Controller {
         $warna       = $this->input->post('warna');
         $jumlah      = $this->input->post('quantity');
         $harga       = $this->input->post('harga');
+        $harga_ukuran= $this->input->post('harga_ukuran');
 
         $data['order'] = array(
             'id_produk'   => $id_produk,
@@ -105,6 +106,7 @@ class Home extends CI_Controller {
             'ukuran'      => $ukuran,
             'warna'       => $warna,
             'harga'       => $harga,
+            'harga_ukuran'=> $harga_ukuran,
             'jumlah'      => $jumlah
         );
 

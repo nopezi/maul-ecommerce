@@ -78,6 +78,7 @@
                                         <input type="hidden" name="nama_produk" value="<?=ucwords($data_produk[0]->nama_produk)?>">
                                         <input type="hidden" name="id_produk" value="<?=$data_produk[0]->id_produk?>">
                                         <input type="hidden" name="id_kategori" value="<?=$data_produk[0]->id_kategori?>">
+                                        <input type="hidden" name="harga" value="<?='Rp '.number_format($data_produk[0]->harga)?>">
                                         <hr>
                                     </div>
                                     </div>
@@ -87,7 +88,7 @@
                                     ?>
                                     <div class="form-row">
                                         <div class="col-12">
-                                            <select class="mdb-select md-form" id="barang" name="ukuran" onchange="price()">
+                                            <select class="mdb-select md-form" id="barang" name="ukuran" onchange="price()" required>
                                                 <option value="" disabled selected>Pilih Ukuran</option>
                                                 <?php for($y=0; $y < sizeof($ukuran); $y++): ?>
                                                 <option value="<?='Rp '.number_format($harga_ukuran[$y])?>*<?=ucwords($ukuran[$y])?>"><?=ucwords($ukuran[$y])?></option>
@@ -99,7 +100,7 @@
                                     <?php $warna = explode(',', $data_produk[0]->warna); ?>
                                     <div class="form-row">
                                         <div class="col-12">
-                                            <select class="mdb-select md-form" name="warna">
+                                            <select class="mdb-select md-form" name="warna" required>
                                                 <option value="" disabled selected>Pilih Warna</option>
                                                 <?php foreach($warna as $w): ?>
                                                 <option><?=ucwords($w)?></option>
@@ -162,7 +163,7 @@
             // document.getElementById("harga").value=tes;
             var html =  '<label for="">Harga</label>'+
                         '<p class="text-danger h6">'+pecah[0]+'</p>' +
-                        '<input type="hidden" name="harga" value="'+pecah[0]+'">';
+                        '<input type="hidden" name="harga_ukuran" value="'+pecah[0]+'">';
             $('#tampil').html(html);
             console.log(pecah);
     }
