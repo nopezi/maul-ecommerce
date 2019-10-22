@@ -1,38 +1,58 @@
-<div class="container" style="margin-top:80px; margin-bottom: 100px">
+<div class="container-fluid" style="margin-top:80px">
+    <div class="row">
+        <div class="col-md-12">
+            <ul id="menu">
+                <li><a href="<?=base_url('home/kategori')?>/<?=$data_produk[0]->id_kategori?>">Kategori Produk</a></li>
+                <li>></li>
+                <li>Detail Product</li>
+            </ul> 
+        </div>
+    </div>
+</div>
+
+<div class="container" style="margin-top:30px; margin-bottom: 101px">
     <div class="row">
         <div class="col-12">
             <div class="card">
                 <div class="card-body">
                     <div class="row">
-                        <div class="col-12 col-md-6 col-lg-6">
+                        <div class="col-12 col-md-6 col-lg-5">
                             <!--Carousel Wrapper-->
-                            <div id="carousel-example-1z" class="carousel slide carousel-fade" data-ride="carousel">
+                            <div id="carousel-example-1z" class="carousel slide carousel-fade mb-3" data-ride="carousel">
                                 <!--Indicators-->
+                                <?php $gambar = explode(',', $data_produk[0]->gambar); ?>
                                 <ol class="carousel-indicators">
                                     <li data-target="#carousel-example-1z" data-slide-to="0" class="active"></li>
+                                    <?php for($i=1; $i < sizeof($gambar); $i++): ?>
                                     <li data-target="#carousel-example-1z" data-slide-to="1"></li>
-                                    <li data-target="#carousel-example-1z" data-slide-to="2"></li>
+                                    <?php endfor;?>
+                                    <!-- <li data-target="#carousel-example-1z" data-slide-to="2"></li> -->
                                 </ol>
                                 <!--/.Indicators-->
                                 <!--Slides-->
+                                
                                 <div class="carousel-inner" role="listbox">
                                     <!--First slide-->
                                     <div class="carousel-item active">
-                                    <img class="d-block w-100" src="https://distrodakwah.id/assets/uploads/featured_image/utama/am250p-black.jpeg"
-                                        alt="First slide">
+                                    <center>
+                                    <img class="d-block w-100" src="<?=base_url()?>assets/gambar/<?=trim($gambar[0])?>" 
+                                    alt="First slide" style="max-height: 350px; min-height: 350px;">
                                     </div>
+                                    </center>
                                     <!--/First slide-->
-                                    <!--Second slide-->
+                                    <!-- Second slide-->
+                                    <?php for($i=1; $i < sizeof($gambar); $i++): ?>
                                     <div class="carousel-item">
-                                    <img class="d-block w-100" src="https://distrodakwah.id/assets/uploads/featured_image/utama/am250p-blue.jpeg"
-                                        alt="Second slide">
+                                    <img class="d-block w-100" src="<?=base_url()?>assets/gambar/<?=trim($gambar[$i])?>"
+                                        alt="Second slide" style="max-height: 350px; min-height: 350px">
                                     </div>
+                                    <?php endfor;?>
                                     <!--/Second slide-->
                                     <!--Third slide-->
-                                    <div class="carousel-item">
+                                    <!-- <div class="carousel-item">
                                     <img class="d-block w-100" src="https://distrodakwah.id/assets/uploads/featured_image/utama/am250p-red.jpeg"
                                         alt="Third slide">
-                                    </div>
+                                    </div> -->
                                     <!--/Third slide-->
                                 </div>
                                 <!--/.Slides-->
@@ -49,35 +69,43 @@
                             </div>
                             <!--/.Carousel Wrapper-->
                         </div>
-                        <div class="col-12 col-md-6 col-lg-6">
+                        <div class="col-12 col-md-6 col-lg-6 offset-lg-1">
                             <!-- <div class="row"> -->
-                                <form action="<?=base_url('home/order_product/')?>jaket" method="post">
+                                <form action="<?=base_url('home/order_product/')?>" method="post">
                                     <div class="form-row">
                                     <div class="col-12">
-                                        <p class="h6">Judul Produk</p>
+                                        <p class="h6"><?=ucwords($data_produk[0]->nama_produk)?></p>
+                                        <input type="hidden" name="nama_produk" value="<?=ucwords($data_produk[0]->nama_produk)?>">
+                                        <input type="hidden" name="id_produk" value="<?=$data_produk[0]->id_produk?>">
+                                        <input type="hidden" name="id_kategori" value="<?=$data_produk[0]->id_kategori?>">
                                         <hr>
                                     </div>
                                     </div>
+                                    <?php 
+                                    $ukuran = explode(',', $data_produk[0]->ukuran); 
+                                    $harga_ukuran = explode(',', $data_produk[0]->harga_ukuran); 
+                                    ?>
                                     <div class="form-row">
                                         <div class="col-12">
-                                            <select class="mdb-select md-form" id="barang" name="warna" onchange="price()">
-                                                <option value="" disabled selected>Pilih Warna</option>
-                                                <option value="Rp. 10.000">Abu Misty</option>
-                                                <option value="Rp. 30.000">Biru</option>
-                                                <option value="Rp. 50.000">Hitam</option>
-                                            </select>
-                                            <label for="">Pilih Color/Warna</label>
-                                        </div>
-                                    </div>
-                                    <div class="form-row">
-                                        <div class="col-12">
-                                            <select class="mdb-select md-form" name="ukuran">
+                                            <select class="mdb-select md-form" id="barang" name="ukuran" onchange="price()">
                                                 <option value="" disabled selected>Pilih Ukuran</option>
-                                                <option value="Rp. 10.000">M</option>
-                                                <option value="Rp. 30.000">L</option>
-                                                <option value="Rp. 50.000">XL</option>
+                                                <?php for($y=0; $y < sizeof($ukuran); $y++): ?>
+                                                <option value="<?='Rp '.number_format($harga_ukuran[$y])?>*<?=ucwords($ukuran[$y])?>"><?=ucwords($ukuran[$y])?></option>
+                                                <?php endfor;?>
                                             </select>
                                             <label for="">Pilih Ukuran</label>
+                                        </div>
+                                    </div>
+                                    <?php $warna = explode(',', $data_produk[0]->warna); ?>
+                                    <div class="form-row">
+                                        <div class="col-12">
+                                            <select class="mdb-select md-form" name="warna">
+                                                <option value="" disabled selected>Pilih Warna</option>
+                                                <?php foreach($warna as $w): ?>
+                                                <option><?=ucwords($w)?></option>
+                                                <?php endforeach;?>
+                                            </select>
+                                            <label for="">Pilih Warna</label>
                                         </div>
                                     </div>
                                     <!-- <div class="col-12"> -->
@@ -85,9 +113,9 @@
                                             <div class="col-12 col-md-1 col-lg-1">
                                                 <label for="">Quantity</label>
                                                 <div class="def-number-input number-input safari_only">
-                                                    <button onclick="this.parentNode.querySelector('input[name=quantity]').stepDown()" class="minus"></button>
+                                                    <button type="button" onclick="this.parentNode.querySelector('input[name=quantity]').stepDown()" class="minus"></button>
                                                     <input class="quantity" min="0"  name="quantity" value="1" type="number">
-                                                    <button onclick="this.parentNode.querySelector('input[name=quantity]').stepUp()" class="plus"></button>
+                                                    <button type="button" onclick="this.parentNode.querySelector('input[name=quantity]').stepUp()" class="plus"></button>
                                                 </div>
                                                 <!-- <div class="md-form">
                                                     <input type="number" class="form-control" id="angka" onkeyup="sum();">
@@ -108,6 +136,14 @@
                             <!-- </div> -->
                         </div>
                     </div>
+                    <div class="row mt-4">
+                        <div class="col-12 col-md-10 col-lg-10">
+                            <p class="h6">Keterangan Produk</p>
+                            <p>
+                                <?=$data_produk[0]->keterangan?>
+                            </p>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -122,11 +158,13 @@
 
     function price() {
         var tes = document.getElementById("barang").value;
+        var pecah = tes.split("*");
             // document.getElementById("harga").value=tes;
             var html =  '<label for="">Harga</label>'+
-                        '<p class="text-danger h6">'+tes+'</p>';
+                        '<p class="text-danger h6">'+pecah[0]+'</p>' +
+                        '<input type="hidden" name="harga" value="'+pecah[0]+'">';
             $('#tampil').html(html);
-            console.log(tes);
+            console.log(pecah);
     }
     function sum(){
         // this.parentNode.querySelector('input[name=quantity]').stepDown()

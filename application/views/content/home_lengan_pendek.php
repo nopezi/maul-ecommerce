@@ -2,33 +2,26 @@
 
     <div class="carousel-inner v-2" role="listbox">
 
-        <div class="carousel-item active">
-        <div class="col-12 col-md-4">
-            <div class="card mb-2">
-            <img class="card-img-top" src="https://distrodakwah.id/assets/uploads/featured_image/utama/195putih.jpg"
-                alt="Card image cap">
-            <div class="card-body text-center">
-                <h4 class="card-title font-weight-bold">Card title</h4>
-                <p class="h6 orange-text">Rp. 10.000</p>
-                <a type="button" href="<?=base_url('home/detail_product')?>" target="_blank" class="col-md-12 btn btn-md btn-rounded warning-color-dark text-center">Pilih Variant</a>
-            </div>
-            </div>
-        </div>
-        </div>
-
-        <div class="carousel-item">
+        
+        <?php for($i=0; $i < sizeof($data_produk); $i++): ?>
+        <?php 
+            $gambar = explode(',', $data_produk[$i]->gambar);
+            $aktif = '';
+            if($i < 1){ $aktif = 'active'; }
+        ?>
+        <div class="carousel-item <?=$aktif?>">
             <div class="col-12 col-md-4">
                 <div class="card mb-2">
-                    <img class="card-img-top" src="https://distrodakwah.id/assets/uploads/featured_image/utama/195putih.jpg"
-                        alt="Card image cap">
+                    <img class="card-img-top" src="<?=base_url()?>assets/gambar/<?=$gambar[0]?>" alt="Card image cap" style="max-height: 300px">
                     <div class="card-body text-center">
-                        <h4 class="card-title font-weight-bold">Card title</h4>
-                        <p class="h6 orange-text">Rp. 10.000</p>
+                        <h4 class="card-title font-weight-bold"><?=$data_produk[$i]->nama_produk?></h4>
+                        <p class="h6 orange-text"><?='Rp. '.number_format($data_produk[$i]->harga)?></p>
                         <a type="button" href="<?=base_url('home/detail_product')?>" target="_blank" target="_blank" class="col-md-12 btn btn-md btn-rounded warning-color-dark text-center">Pilih Variant</a>
                     </div>
                 </div>
             </div>
         </div>
+        <?php endfor; ?>
 
     </div>
 

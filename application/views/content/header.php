@@ -32,7 +32,7 @@
             <a href="<?=base_url()?>" class="nav-link text-success"><i class="fas fa-shopping-bag"></i> MaulShop</a>
         </li>
     </ul>
-    <ul class="navbar-nav mr-auto justify-content-center">
+    <!-- <ul class="navbar-nav mr-auto justify-content-center">
       <li class="nav-item nav-center">
             <a href="<?=base_url('home/lengan_panjang')?>" class="nav-link text-success">Lengan Panjang</a>
         </li>
@@ -42,7 +42,7 @@
         <li class="nav-item">
             <a href="<?=base_url('home/hoodie')?>" class="nav-link text-success">Hoodie</a>
         </li>
-    </ul>
+    </ul> -->
   </div>
 
 </nav>
