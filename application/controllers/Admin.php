@@ -131,6 +131,103 @@ class Admin extends CI_Controller {
         }
     }
 
+    function edit_produk($id){
+        // $this->m_produk;
+        $data['halaman']  = 'Edit Produk';
+        $data['produk']   = $this->m_produk->tampil_detail($id);
+        $data['kategori'] = $this->m_kategori->tampil_kategori();
+        $this->load->view('backend/edit_produk', $data);
+    }
+
+    function aksi_edit_produk(){
+        $nama_produk  = $this->input->post('nama_produk');
+        $id_produk    = $this->input->post('id_produk');
+        $id_kategori  = $this->input->post('kategori');
+        $sub_kategori = $this->input->post('sub_kategori');
+        $keterangan   = $this->input->post('keterangan');
+        $harga        = $this->input->post('harga');
+        $ukuran       = $this->input->post('ukuran');
+        $harga_ukuran = $this->input->post('harga_ukuran');
+        $file2         = $this->input->post('file');
+
+        if($_FILES['file'])  
+        {  
+            $number_of_files = sizeof($_FILES['file']['tmp_name']);  
+            $files = $_FILES['file'];  
+            $config=array(  
+            'upload_path' => './assets/gambar/', //direktori untuk menyimpan gambar  
+            'allowed_types' => 'jpg|jpeg|png|gif',  
+            // 'max_size' => '2000',  
+            // 'max_width' => '2000',  
+            // 'max_height' => '2000',
+            'encrypt_name' => TRUE  
+            );
+              
+            for ($i = 0;$i < $number_of_files; $i++)  
+            {  
+                $_FILES['file']['name']     = $files['name'][$i];  
+                $_FILES['file']['type']     = $files['type'][$i];  
+                $_FILES['file']['tmp_name'] = $files['tmp_name'][$i];  
+                $_FILES['file']['error']    = $files['error'][$i];  
+                $_FILES['file']['size']     = $files['size'][$i];  
+                $this->load->library('upload', $config);  
+                if($this->upload->do_upload('file')){
+                    $data[] = array('upload_data' => $this->upload->data());
+                    // $data[$i] = $this->upload->data();
+                    echo '<pre>';
+                    print_r($data);
+                    echo '<pre>';
+                    // echo $data[];
+                }else{
+                    // $error = array('error' => $this->upload->display_errors());
+                    $error = $this->upload->display_errors();
+                    echo '<pre>';
+                    print_r($error);
+                    echo '<pre>';
+                    // echo $i;
+                    $data2[] = $file2[$i];
+                    // print_r($file2);
+        
+                    // $this->session->set_flashdata('gagal', $error);
+                    // redirect(base_url('admin/tambah_produk'));
+                } 
+                 
+            }
+            echo '<br>';
+            print_r($data);
+            print_r($data2);
+
+            foreach($data as $dt){
+                $nama_gambar[] = $dt['upload_data']['file_name'];
+            }
+            
+            $gabung = array_merge($nama_gambar, $data2);
+
+            print_r($gabung);
+
+            // $nama_gambar_gabung = implode(',', $nama_gambar);
+
+            // echo $result;
+            // print_r(json_encode($data));
+            // if($result == true){
+            //     redirect('admin/produk');
+            // }
+        }
+
+        // $data = array(
+        //     'nama_produk'  => $nama_produk,
+        //     'id_kategori'  => $id_kategori,
+        //     'sub_kategori' => $sub_kategori,
+        //     'harga'        => $harga,
+        //     'ukuran'       => $ukuran,
+        //     'harga_ukuran' => $harga_ukuran,
+        //     // 'gambar'       => $nama_gambar_gabung,
+        //     'keterangan'   => $keterangan 
+        // );
+
+        // print_r(json_encode($data));
+    }
+
     /* END PRODUK */
 
     /* KATEGORI */

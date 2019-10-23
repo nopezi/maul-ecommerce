@@ -73,11 +73,11 @@
                                         <tr>
                                             <td><?=$i?></td>
                                             <td class="txt-oflo">
-                                                <a href="http://<?=$dp->id_produk?>"><?=$dp->nama_produk?></a>
+                                                <a href="<?=base_url('admin/edit_produk')?>/<?=$dp->id_produk?>"><?=$dp->nama_produk?></a>
                                             </td>
                                             <td><?=$dp->kategori?></td>
-                                            <td class="txt-oflo"><?=$dp->sub_kategori?></td>
-                                            <td><span class="text-success"><?='Rp. '.number_format($dp->harga,2,',','.')?></span></td>
+                                            <td class="txt-oflo"><?=str_replace(',', '<br>', $dp->sub_kategori)?></td>
+                                            <td><span class="text-success"><?='Rp. '.number_format($dp->harga)?></span></td>
                                             <td><?=str_replace(',', '<br>', $dp->ukuran)?></td>
                                             <td>
                                                 <a href="http://" class="btn btn-sm btn-rounded btn-danger">Hapus</a>

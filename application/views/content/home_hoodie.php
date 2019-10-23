@@ -22,7 +22,7 @@
                 <div class="card mb-2">
                 <?php $gambar = explode(',', $produk_limit[$i]->gambar); ?>
                     <img class="card-img-top" src="<?=base_url()?>assets/gambar/<?=$gambar[0]?>"
-                        alt="Card image cap" style="max-height: 300px">
+                        alt="Card image cap" style="max-height: 300px; min-height: 300px">
                     <div class="card-body text-center">
                         <h4 class="card-title font-weight-bold"><?=$produk_limit[$i]->nama_produk?></h4>
                         <p class="h6 orange-text"><?='Rp '.number_format($produk_limit[$i]->harga)?></p>

@@ -76,16 +76,16 @@
 
 <?php $this->load->view('content/footer'); ?>
 <script type="text/javascript">
-// $(document).ready(function(){
-//     $('#dtBasicExample').DataTable({
-//         "scrollX" : true,
-//         "searching": false,
-//         "bPaginate": true,
-//         "bDestroy": false,
-//         "bLengthChange": false,
-//         "bFilter": false,
-//         "bInfo": false,
-//         "bAutoWidth": true,
-//     });
-// });
+$(document).ready(function(){
+    $('#dtBasicExample').DataTable({
+        "scrollX" : true,
+        "searching": false,
+        "bPaginate": true,
+        "bDestroy": false,
+        "bLengthChange": false,
+        "bFilter": false,
+        "bInfo": false,
+        "bAutoWidth": true,
+    });
+});
 </script>
