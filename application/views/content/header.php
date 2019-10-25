@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Maul Shop</title>
+    <title>Qaiza Shop</title>
     <link rel='icon' href='https://img.icons8.com/officel/16/000000/lock.png' type='image/x-icon' />
     <link rel="stylesheet" href="<?=base_url()?>assets/css/bootstrap.min.css">
     <link rel="stylesheet" href="<?php echo base_url() ?>assets/css/fontawesome-free-5.10.1-web/css/all.css">
@@ -29,7 +29,10 @@
   <div class="collapse navbar-collapse" id="basicExampleNav">
     <ul class="navbar-nav mr-auto">
         <li class="nav-item">
-            <a href="<?=base_url()?>" class="nav-link text-success"><i class="fas fa-shopping-bag"></i> MaulShop</a>
+            <!-- <a href="<?=base_url()?>" class="nav-link text-success"><i class="fas fa-shopping-bag"></i> MaulShop</a> -->
+            <a href="<?=base_url()?>" class="nav-link text-success">
+            <img src="<?=base_url()?>assets/img/logo-maul.jpg" width="60" height="30" alt="mdb logo">
+            </a>
         </li>
     </ul>
     <!-- <ul class="navbar-nav mr-auto justify-content-center">

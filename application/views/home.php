@@ -28,6 +28,7 @@
                     <div class="card-body text-center post-body">
                         <h5 class="card-title font-weight-bold"><?=$k1->nama_produk?></h4>
                         <p class="h6 orange-text"><?='Rp '.number_format($k1->harga)?></p>
+                        <small><?=ucwords($k1->sub_kategori_produk)?></small>
                     </div>
                     <a href="<?=base_url('home/detail')?>/<?=$k1->id_produk?>" type="button" target="_blank" class="card-footer btn btn-md btn-rounded warning-color-dark text-center">
                         Pilih
@@ -51,6 +52,7 @@
                     <div class="card-body text-center post-body">
                         <h5 class="card-title font-weight-bold"><?=$k2->nama_produk?></h4>
                         <p class="h6 orange-text"><?='Rp '.number_format($k2->harga)?></p>
+                        <small><?=ucwords($k2->sub_kategori_produk)?></small>
                     </div>
                     <a href="<?=base_url('home/detail')?>/<?=$k2->id_produk?>" type="button" target="_blank" class="card-footer btn btn-md btn-rounded warning-color-dark text-center">
                         Pilih
@@ -75,6 +77,7 @@
                     <div class="card-body text-center post-body">
                         <h5 class="card-title font-weight-bold"><?=$k3->nama_produk?></h4>
                         <p class="h6 orange-text"><?='Rp '.number_format($k3->harga)?></p>
+                        <small><?=ucwords($k3->sub_kategori_produk)?></small>
                     </div>
                     <a href="<?=base_url('home/detail')?>/<?=$k3->id_produk?>" type="button" target="_blank" class="card-footer btn btn-md btn-rounded warning-color-dark text-center">
                         Pilih

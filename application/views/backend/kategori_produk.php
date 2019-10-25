@@ -51,7 +51,14 @@
                                 </select>
                             </div>
                             <!-- <h3 class="box-title">Recent sales</h3> -->
+                            <?php 
+                            for($y=0; $y < sizeof($semua_kategori); $y++){
+                                $hasil = $y;
+                            } 
+                            ?>
+                            <?php if($hasil <= 4):?>
                             <a href="<?=base_url('admin/tambah_kategori')?>" class="btn btn-info"><i class="fa fa-plus-square-o"></i></a>
+                            <?php endif;?>
                             <!-- <div class="table-responsive"> -->
                                 <table class="table table-hover" id="dtBasicExample" cellspacing="0" width="100%">
                                     <thead>
@@ -79,7 +86,7 @@
                                             <!-- <td class="txt-oflo">April 18, 2017</td> -->
                                             <td>
                                                 <a href="<?=base_url('admin/edit_kategori')?>/<?=$sk->id_kategori?>" class="btn btn-warning"><i class="fa fa-edit"></i></a>
-                                                <a href="<?=base_url('admin/hapus_kategori')?>/<?=$sk->id_kategori?>" class="btn btn-danger"><i class="fa fa-trash-o"></i></a>
+                                                <!-- <a href="<?//=base_url('admin/hapus_kategori')?>/<?=$sk->id_kategori?>" class="btn btn-danger"><i class="fa fa-trash-o"></i></a> -->
                                             </td>
                                         </tr>
                                     <?php endforeach; ?>
