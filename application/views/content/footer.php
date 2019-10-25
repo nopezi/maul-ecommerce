@@ -3,7 +3,7 @@
 
   <!-- Copyright -->
   <div class="footer-copyright text-center py-3">
-      © <?=date('Y')?> maul-shop.com
+      © <?=date('Y')?> Qaiza-shop.com
   </div>
   <!-- Copyright -->
 
