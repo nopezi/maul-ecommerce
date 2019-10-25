@@ -103,6 +103,32 @@ class M_produk extends CI_Model {
         return $this->db->get()->result();
     }
 
+    function tampil_subkategori($sub_kategori){
+        $this->db->select('*');
+        $this->db->from('produk');
+        $this->db->where('sub_kategori', $sub_kategori);
+        // $this->db->order_by('id_produk', 'DESC');
+        return $this->db->get()->result();
+    }
+
+    function tampil_search($search){
+        $this->db->select('produk.id_produk, 
+                           produk.id_kategori, 
+                           produk.nama_produk,
+                           produk.sub_kategori,
+                           produk.harga,
+                           produk.gambar,
+                           kategori.id_kategori,
+                           kategori.kategori');
+        $this->db->from('produk, kategori');
+        $this->db->where('produk.id_kategori=kategori.id_kategori');
+        $this->db->like('nama_produk', $search);
+        // $this->db->like('sub_kategori', $search);
+        // $this->db->like('kategori', $search);
+        // $this->db->order_by('id_produk', 'DESC');
+        return $this->db->get()->result();
+    }
+
     function tambah($table, $data){
         return $this->db->insert($table, $data);
     }

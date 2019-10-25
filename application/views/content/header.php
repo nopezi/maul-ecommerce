@@ -46,6 +46,32 @@
             <a href="<?=base_url('home/hoodie')?>" class="nav-link text-success">Hoodie</a>
         </li>
     </ul> -->
+
+    <ul class="navbar-nav mr-auto">
+            <!-- <li class="nav-item active">
+               <a class="nav-link waves-effect waves-light" href="#">Home <span class="sr-only">(current)</span></a>
+            </li> -->
+    <?php foreach($kategori as $k): ?>
+    <?php $sub_kategori = explode(',', $k->sub_kategori); ?>
+        <li class="nav-item dropdown text-success">
+            <a class="nav-link dropdown-toggle waves-effect waves-light" id="navbarDropdownMenuLink" 
+            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><?=$k->kategori?></a>
+            <div class="dropdown-menu dropdown-info" aria-labelledby="navbarDropdownMenuLink">
+              <?php foreach($sub_kategori as $sk): ?>
+                <a class="dropdown-item waves-effect waves-light text-success" href="<?=base_url('home/sk')?>?sk=<?=$sk?>"><?=$sk?></a>
+                <!-- <a class="dropdown-item waves-effect waves-light" href="#">Another action</a>
+                <a class="dropdown-item waves-effect waves-light" href="#">Something else here</a> -->
+              <?php endforeach;?>
+            </div>
+        </li>
+    <?php endforeach; ?>
+    </ul>
+        <form class="form-inline" action="<?=base_url('home/search')?>" method="get">
+            <div class="md-form my-0 text-success">
+                <input name="s" class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
+            </div>
+        </form>
+
   </div>
 
 </nav>

@@ -16,6 +16,7 @@ class Home extends CI_Controller {
         $produk       = $this->m_produk->tampil();
         $kategori     = $this->m_kategori->tampil_kategori();
         $produk_limit = $this->m_produk->tampil_limit();
+        $data['kategori']      = $this->m_kategori->tampil_kategori();
         $data['kategori_1']    = $this->m_produk->tampil_kategori_1();
         $data['kategori_2']    = $this->m_produk->tampil_kategori_2();
         $data['kategori_3']    = $this->m_produk->tampil_kategori_3();
@@ -47,19 +48,34 @@ class Home extends CI_Controller {
         $data['data_kategori'] = $this->m_kategori->tampil_kategori();
         $data['data_produk'] = $this->m_produk->tampil();
         
-        $this->load->view('content/header');
+        $this->load->view('content/header', $data);
         $this->load->view('home', $data);
     }
 
     public function kategori($id){
         if(!empty($id)){
         $data['data_produk'] = $this->m_produk->tampil_perid($id);
-        $this->load->view('content/header');
+        $data['kategori']      = $this->m_kategori->tampil_kategori();
+        $this->load->view('content/header', $data);
         $this->load->view('frontend/kategori', $data);
         $this->load->view('content/footer');
         }else{
             echo 'kosong';
         }
+    }
+
+    public function sk(){
+        $sub_kategori = $this->input->get('sk');
+        $data['tampil'] = $this->m_produk->tampil_subkategori($sub_kategori);
+        $data['kategori']      = $this->m_kategori->tampil_kategori();
+        if(!empty($sub_kategori)){
+            $this->load->view('content/header', $data);
+            $this->load->view('frontend/subkategori', $data);
+            $this->load->view('content/footer');
+        }else{
+            redirect(base_url());
+        }
+        // print_r($data);
     }
     
     public function detail($id){
@@ -67,6 +83,20 @@ class Home extends CI_Controller {
             $data['data_produk'] = $this->m_produk->tampil_detail($id);
             $this->load->view('content/header');
             $this->load->view('frontend/detail_product', $data);
+        }
+    }
+
+    public function search(){
+        $search = $this->input->get('s');
+        $data['tampil']        = $this->m_produk->tampil_search($search);
+        $data['kategori']      = $this->m_kategori->tampil_kategori();
+
+        if(!empty($search)){
+            $this->load->view('content/header', $data);
+            $this->load->view('frontend/search', $data);
+            $this->load->view('content/footer');
+        }else{
+            redirect(base_url());
         }
     }
 
