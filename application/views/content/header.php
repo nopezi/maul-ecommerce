@@ -68,7 +68,7 @@
     </ul>
         <form class="form-inline" action="<?=base_url('home/search')?>" method="get">
             <div class="md-form my-0 text-success">
-                <input name="s" class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
+                <input name="s" class="form-control mr-sm-2" type="text" placeholder="Search Produk" aria-label="Search">
             </div>
         </form>
 
