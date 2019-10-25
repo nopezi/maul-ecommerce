@@ -29,7 +29,14 @@
                     <div class="col-lg-9 col-sm-8 col-md-8 col-xs-12">
                         
                         <ol class="breadcrumb">
-                            <li><a href="#"><?=$halaman?></a></li>
+                            <!-- <li><a href="#"><?=$halaman?></a></li> -->
+                            <li>
+                                <a href="<?=base_url('admin/tambah_produk')?>" class="btn btn-md btn-success">
+                                   <div class="text-white">
+                                   <i class="fa fa-plus"></i> Tambah Produk
+                                   </div> 
+                                </a>
+                            </li>
                         </ol>
                     </div>
                     <!-- /.col-lg-12 -->
@@ -38,25 +45,54 @@
                 <!-- ============================================================== -->
                 <!-- table -->
                 <!-- ============================================================== -->
+
                 <div class="row">
                     <div class="col-md-12 col-lg-12 col-sm-12">
+                        <div class="">
+                        <!-- <pre> -->
+                            <table class="table" id="dtBasicExample" cellspacing="0" width="100%">
+                                <thead class="white-box">
+                                    <tr>
+                                        <th>Produk</th>
+                                        <th>Gambar</th>
+                                        <th></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                <?php foreach($data_produk as $dp): ?>
+                                <?php $gambar = explode(',', $dp->gambar); ?>
+                                    <tr class="white-box">
+                                        <td>
+                                            <a href="<?=base_url('home/detail')?>/<?=$dp->id_produk?>" target="_blank">
+                                                <p class="text-success h5"><?=ucwords($dp->nama_produk)?></p>
+                                            </a>
+                                            <p><?=$dp->kategori?></p>
+                                            <p><?=$dp->sub_kategori?></p>
+                                            <p class="text-warning"><?='Rp '.number_format($dp->harga)?></p>
+                                            <p><?=strtoupper($dp->ukuran)?></p>
+                                        </td>
+                                        <td>
+                                            <img class="img-thumbnail" src="<?=base_url()?>assets/gambar/<?=$gambar[0]?>" height="10px" width="100px">
+                                        </td>
+                                        <td>
+                                            <a href=""><i class="fa fa-edit"></i></a>
+                                            <a href=""><i class="fa fa-trash"></i></a>
+                                        </td>
+                                    </tr>
+                                <?php endforeach;?>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- <div class="row">
+                    <div class="col-md-12 col-lg-12 col-sm-12">
                         <div class="white-box">
-                        <!-- <pre> -->
-                        <?php //print_r($data_produk); ?>
-                        <!-- <pre> -->
-                            <!-- <div class="col-md-3 col-sm-4 col-xs-6 pull-right">
-                                <select class="form-control pull-right row b-none">
-                                    <option>March 2017</option>
-                                    <option>April 2017</option>
-                                    <option>May 2017</option>
-                                    <option>June 2017</option>
-                                    <option>July 2017</option>
-                                </select>
-                            </div> -->
                             <h3 class="box-title"><?=$halaman?></h3>
                             <a href="<?=base_url('admin/tambah_produk')?>" class="btn btn-info"><i class="fa fa-plus-square-o"></i></a>
-                            <!-- <div class="table-responsive"> -->
-                                <table class="table table-hover" id="dtBasicExample" cellspacing="0" width="100%">
+                           
+                                <table class="table table-hover">
                                     <thead>
                                         <tr>
                                             <th>#</th>
@@ -85,11 +121,11 @@
                                         </tr>
                                     <?php $i++; endforeach; ?>
                                     </tbody>
-                                </table>
+                                </table> -->
                             <!-- </div> -->
-                        </div>
+                        <!-- </div>
                     </div>
-                </div>
+                </div> -->
             </div>
             <!-- /.container-fluid -->
             <?php $this->load->view('backend/core/footer'); ?>

@@ -283,6 +283,14 @@ class Admin extends CI_Controller {
 
     /* END KATEGORI */
 
+    /* GAMBAR HEADER */
+    public function slide(){
+        $data['halaman'] = 'Slider';
+        // $data['semua_kategori'] = $this->m_kategori->tampil_kategori();
+        $this->load->view('backend/slider', $data);
+    }
+    /* GAMBAR HEADER */
+
     /* HALAMAN TES */
 
     function tes(){

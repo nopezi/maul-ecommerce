@@ -64,6 +64,9 @@
                         <a href="<?=base_url('admin/kategori')?>" class="waves-effect"><i class="fa fa-folder-open-o fa-fw" aria-hidden="true"></i>Kategori Produk</a>
                     </li>
                     <li>
+                        <a href="<?=base_url('admin/slide')?>" class="waves-effect"><i class="fa fa-image fa-fw" aria-hidden="true"></i>Gambar Slide</a>
+                    </li>
+                    <li>
                         <a href="<?=base_url('admin/logout')?>" class="waves-effect"><i class="fa fa-sign-out fa-fw" aria-hidden="true"></i>Logout</a>
                     </li>
 

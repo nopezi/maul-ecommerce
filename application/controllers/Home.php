@@ -81,7 +81,8 @@ class Home extends CI_Controller {
     public function detail($id){
         if(!empty($id)){
             $data['data_produk'] = $this->m_produk->tampil_detail($id);
-            $this->load->view('content/header');
+            $data['kategori']    = $this->m_kategori->tampil_kategori();
+            $this->load->view('content/header', $data);
             $this->load->view('frontend/detail_product', $data);
         }
     }

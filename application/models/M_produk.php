@@ -3,7 +3,15 @@
 class M_produk extends CI_Model {
 
     function tampil(){
-        $this->db->select('produk.*, kategori.*');
+        $this->db->select('produk.id_produk, 
+                           produk.id_kategori, 
+                           produk.nama_produk,
+                           produk.sub_kategori,
+                           produk.harga,
+                           produk.gambar,
+                           produk.ukuran,
+                           kategori.id_kategori,
+                           kategori.kategori');
         $this->db->from('produk, kategori');
         $this->db->where('produk.id_kategori=kategori.id_kategori');
         $this->db->order_by('produk.id_kategori', 'ASC');
