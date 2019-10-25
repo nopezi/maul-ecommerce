@@ -20,7 +20,14 @@ class M_produk extends CI_Model {
     }
 
     function tampil_kategori_1(){
-        $this->db->select('produk.*, kategori.*');
+        $this->db->select('produk.id_produk, 
+                           produk.id_kategori, 
+                           produk.nama_produk,
+                           produk.sub_kategori,
+                           produk.harga,
+                           produk.gambar,
+                           kategori.id_kategori,
+                           kategori.kategori');
         $this->db->from('produk, kategori');
         $this->db->where('produk.id_kategori=kategori.id_kategori');
         $this->db->where('produk.id_kategori=1');
@@ -30,7 +37,14 @@ class M_produk extends CI_Model {
     }
 
     function tampil_kategori_2(){
-        $this->db->select('produk.*, kategori.*');
+        $this->db->select('produk.id_produk, 
+                           produk.id_kategori, 
+                           produk.nama_produk,
+                           produk.sub_kategori,
+                           produk.harga,
+                           produk.gambar,
+                           kategori.id_kategori,
+                           kategori.kategori');
         $this->db->from('produk, kategori');
         $this->db->where('produk.id_kategori=kategori.id_kategori');
         $this->db->where('produk.id_kategori=2');
@@ -40,7 +54,14 @@ class M_produk extends CI_Model {
     }
 
     function tampil_kategori_3(){
-        $this->db->select('produk.*, kategori.*');
+        $this->db->select('produk.id_produk, 
+                           produk.id_kategori, 
+                           produk.nama_produk,
+                           produk.sub_kategori,
+                           produk.harga,
+                           produk.gambar,
+                           kategori.id_kategori,
+                           kategori.kategori');
         $this->db->from('produk, kategori');
         $this->db->where('produk.id_kategori=kategori.id_kategori');
         $this->db->where('produk.id_kategori=3');
@@ -50,7 +71,14 @@ class M_produk extends CI_Model {
     }
 
     function tampil_kategori_4(){
-        $this->db->select('produk.*, kategori.*');
+        $this->db->select('produk.id_produk, 
+                           produk.id_kategori, 
+                           produk.nama_produk,
+                           produk.sub_kategori,
+                           produk.harga,
+                           produk.gambar,
+                           kategori.id_kategori,
+                           kategori.kategori');
         $this->db->from('produk, kategori');
         $this->db->where('produk.id_kategori=kategori.id_kategori');
         $this->db->where('produk.id_kategori=4');
