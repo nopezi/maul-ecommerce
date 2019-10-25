@@ -10,6 +10,8 @@ class M_produk extends CI_Model {
                            produk.harga,
                            produk.gambar,
                            produk.ukuran,
+                           produk.harga_ukuran,
+                           produk.keterangan,
                            kategori.id_kategori,
                            kategori.kategori');
         $this->db->from('produk, kategori');
