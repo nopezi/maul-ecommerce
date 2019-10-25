@@ -20,7 +20,7 @@ class Home extends CI_Controller {
         $data['kategori_2']    = $this->m_produk->tampil_kategori_2();
         $data['kategori_3']    = $this->m_produk->tampil_kategori_3();
         $data['kategori_4']    = $this->m_produk->tampil_kategori_4();
-        
+
         foreach($produk as $t){
             foreach($kategori as $k){
                 if($t->id_kategori == $k->id_kategori){
@@ -120,6 +120,10 @@ class Home extends CI_Controller {
         }else{
             echo 'kosong';
         }
+    }
+
+    public function tes(){
+        $this->load->view('errors/tes');
     }
 
 }

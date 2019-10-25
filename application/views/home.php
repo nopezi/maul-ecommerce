@@ -1,15 +1,17 @@
-<div class="container-fluid">
-    <div class="row" style="margin-top:56px; margin-bottom: 20px">
-        <div class="">
+<div class="container-fluid" style="margin-top:56px; margin-bottom: 20px">
+    <div class="row">
+        <div class="col-12">
         <?php $this->load->view('content/slide_header'); ?>
         </div>
     </div>
 </div>
 <?php //print_r($kategori_1); ?>
-<div class="container">
+<div class="container-fluid">
     <div class="row">
         <!-- hoodie -->
+        <div class="col-xl-12">
         <?php $this->load->view('content/home_hoodie'); ?>
+        </div>
         <!-- hoodie -->
     </div>
 </div>
@@ -27,7 +29,7 @@
                         <h5 class="card-title font-weight-bold"><?=$k1->nama_produk?></h4>
                         <p class="h6 orange-text"><?='Rp '.number_format($k1->harga)?></p>
                     </div>
-                    <a href="<?=base_url('home/detail')?>/<?=$k1->  id_produk?>" type="button" target="_blank" class="card-footer btn btn-md btn-rounded warning-color-dark text-center">
+                    <a href="<?=base_url('home/detail')?>/<?=$k1->id_produk?>" type="button" target="_blank" class="card-footer btn btn-md btn-rounded warning-color-dark text-center">
                         Pilih
                     </a>
                 </div>
