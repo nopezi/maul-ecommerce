@@ -11,7 +11,7 @@
                     <div class="card-body text-center">
                         <h4 class="card-title font-weight-bold"><?=$produk_limit[0]->nama_produk?></h4>
                         <p class="h6 orange-text"><?='Rp '.number_format($produk_limit[0]->harga)?></p>
-                        <a type="button" href="<?=base_url('home/detail_product')?>" target="_blank" class="col-md-12 btn btn-md btn-rounded warning-color-dark text-center">Pilih Variant</a>
+                        <a type="button" href="<?=base_url('home/detail')?>/<?=$produk_limit[0]->id_produk?>" target="_blank" class="col-md-12 btn btn-md btn-rounded warning-color-dark text-center">Pilih Variant</a>
                     </div>
                 </div>
             </div>
@@ -26,7 +26,7 @@
                     <div class="card-body text-center">
                         <h4 class="card-title font-weight-bold"><?=$produk_limit[$i]->nama_produk?></h4>
                         <p class="h6 orange-text"><?='Rp '.number_format($produk_limit[$i]->harga)?></p>
-                        <a type="button" href="<?=base_url('home/detail_product')?>" target="_blank" target="_blank" class="col-md-12 btn btn-md btn-rounded warning-color-dark text-center">Pilih Variant</a>
+                        <a type="button" href="<?=base_url('home/detail')?>/<?=$produk_limit[$i]->id_produk?>" target="_blank" target="_blank" class="col-md-12 btn btn-md btn-rounded warning-color-dark text-center">Pilih Variant</a>
                     </div>
                 </div>
             </div>
@@ -39,7 +39,7 @@
     <div class="controls-top">
         <a class="btn-floating btn-success" href="#carousel-example-multi11" data-slide="prev"><i
             class="fas fa-chevron-left"></i></a>
-        <a href="<?=base_url('home/hoodie')?>" target="_blank" class="btn btn-md btn-success btn-rounded">Selengkapnya</a>
+        <!-- <a href="<?=base_url('home/hoodie')?>" target="_blank" class="btn btn-md btn-success btn-rounded">Selengkapnya</a> -->
         <a class="btn-floating btn-success" href="#carousel-example-multi11" data-slide="next"><i
             class="fas fa-chevron-right"></i></a>
     </div>

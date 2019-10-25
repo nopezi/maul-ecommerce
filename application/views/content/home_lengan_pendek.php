@@ -1,38 +1,52 @@
-<div id="carousel-example-multi2" class="carousel slide carousel-multi-item v-2" data-ride="carousel">
-
-    <div class="carousel-inner v-2" role="listbox">
-
-        
-        <?php for($i=0; $i < sizeof($data_produk); $i++): ?>
-        <?php 
-            $gambar = explode(',', $data_produk[$i]->gambar);
-            $aktif = '';
-            if($i < 1){ $aktif = 'active'; }
-        ?>
-        <div class="carousel-item <?=$aktif?>">
-            <div class="col-12 col-md-4">
-                <div class="card mb-2">
-                    <img class="card-img-top" src="<?=base_url()?>assets/gambar/<?=$gambar[0]?>" alt="Card image cap" style="max-height: 300px">
-                    <div class="card-body text-center">
-                        <h4 class="card-title font-weight-bold"><?=$data_produk[$i]->nama_produk?></h4>
-                        <p class="h6 orange-text"><?='Rp. '.number_format($data_produk[$i]->harga)?></p>
-                        <a type="button" href="<?=base_url('home/detail_product')?>" target="_blank" target="_blank" class="col-md-12 btn btn-md btn-rounded warning-color-dark text-center">Pilih Variant</a>
+<?php foreach($data_kategori as $dk): ?>
+    <?php $y=0;
+    foreach($data_produk as $dp){
+        if($dp->id_kategori == $dk->id_kategori){
+            if($y>0){
+                break;
+            }
+    ?>
+    <!-- <div class="row">
+        <div class="col-md-12">
+            <p class="h4">
+                <a href="<?//=base_url('home/kategori')?>/<?//=$dk->id_kategori?>" target="_blank" class="text-success"><?=$dk->kategori?></a>
+            </p>
+            <hr>
+        </div>
+    </div> -->
+    <?php $y++;  } } ?>
+    <div class="row mb-4">
+    
+    <?php for($i=0; $i < sizeof($data_produk); $i++): ?>
+    <?php $y=0; ?>
+    <?php if($dk->id_kategori == $data_produk[$i]->id_kategori):?>
+    <?php echo $y; ?>
+        <div class="col-12 col-md-4 col-lg-3">
+            <div class="card-group">
+                <div class="card">
+                    <?php $gambar = explode(',', $data_produk[$i]->gambar); ?>
+                    <img src="<?=base_url()?>assets/gambar/<?=$gambar[0]?>" alt="Card image cap" class="card-img-top post-thumb" style="max-height: 200px; min-height: 200px">
+                    <div class="card-body text-center post-body">
+                        <h5 class="card-title font-weight-bold"><?=$data_produk[$i]->nama_produk?></h4>
+                        <p class="h6 orange-text"><?='Rp '.number_format($data_produk[$i]->harga)?></p>
                     </div>
+                    <a href="<?=base_url('home/detail')?>/<?=$data_produk[$i]->id_produk?>" type="button" target="_blank" class="card-footer btn btn-md btn-rounded warning-color-dark text-center">
+                        Pilih
+                    </a>
                 </div>
             </div>
         </div>
-        <?php endfor; ?>
-
+    <?php $y++; ?>
+    <?php endif;?>
+    <?php endfor; ?>
     </div>
-
-    <!--Controls-->
-    <div class="controls-top">
-        <a class="btn-floating btn-success" href="#carousel-example-multi2" data-slide="prev"><i
-            class="fas fa-chevron-left"></i></a>
-        <a href="<?=base_url('home/lengan_pendek')?>" target="_blank" class="btn btn-md btn-success btn-rounded">Selengkapnya</a>
-        <a class="btn-floating btn-success" href="#carousel-example-multi2" data-slide="next"><i
-            class="fas fa-chevron-right"></i></a>
-    </div>
-    <!--/.Controls-->
-
-</div>
+    <?php $y=0;
+    foreach($data_produk as $dp){
+         if($dp->id_kategori == $dk->id_kategori){
+             if($y>0){
+                 break;
+             }
+    ?>
+        <hr>
+    <?php $y++;  } } ?>
+    <?php endforeach;?>

@@ -19,6 +19,46 @@ class M_produk extends CI_Model {
         return $this->db->get()->result();
     }
 
+    function tampil_kategori_1(){
+        $this->db->select('produk.*, kategori.*');
+        $this->db->from('produk, kategori');
+        $this->db->where('produk.id_kategori=kategori.id_kategori');
+        $this->db->where('produk.id_kategori=1');
+        $this->db->limit('4');
+        $this->db->order_by('produk.id_kategori', 'ASC');
+        return $this->db->get()->result();
+    }
+
+    function tampil_kategori_2(){
+        $this->db->select('produk.*, kategori.*');
+        $this->db->from('produk, kategori');
+        $this->db->where('produk.id_kategori=kategori.id_kategori');
+        $this->db->where('produk.id_kategori=2');
+        $this->db->limit('4');
+        $this->db->order_by('produk.id_kategori', 'ASC');
+        return $this->db->get()->result();
+    }
+
+    function tampil_kategori_3(){
+        $this->db->select('produk.*, kategori.*');
+        $this->db->from('produk, kategori');
+        $this->db->where('produk.id_kategori=kategori.id_kategori');
+        $this->db->where('produk.id_kategori=3');
+        $this->db->limit('4');
+        $this->db->order_by('produk.id_kategori', 'ASC');
+        return $this->db->get()->result();
+    }
+
+    function tampil_kategori_4(){
+        $this->db->select('produk.*, kategori.*');
+        $this->db->from('produk, kategori');
+        $this->db->where('produk.id_kategori=kategori.id_kategori');
+        $this->db->where('produk.id_kategori=4');
+        $this->db->limit('4');
+        $this->db->order_by('produk.id_kategori', 'ASC');
+        return $this->db->get()->result();
+    }
+
     function tampil_perid($id){
         $this->db->select('*');
         $this->db->from('produk');

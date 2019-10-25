@@ -16,7 +16,11 @@ class Home extends CI_Controller {
         $produk       = $this->m_produk->tampil();
         $kategori     = $this->m_kategori->tampil_kategori();
         $produk_limit = $this->m_produk->tampil_limit();
-
+        $data['kategori_1']    = $this->m_produk->tampil_kategori_1();
+        $data['kategori_2']    = $this->m_produk->tampil_kategori_2();
+        $data['kategori_3']    = $this->m_produk->tampil_kategori_3();
+        $data['kategori_4']    = $this->m_produk->tampil_kategori_4();
+        
         foreach($produk as $t){
             foreach($kategori as $k){
                 if($t->id_kategori == $k->id_kategori){

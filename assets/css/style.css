@@ -32,6 +32,12 @@
       flex-direction: column;
   }   */
 /* tinggi card */
+.post-body2 {
+  height: 115px;
+  position: relative;
+  /* padding: 20px 15px 0; */
+  box-shadow: 0px 2px 20px rgba(0,0,0,0.2);
+}
 .post-body {
   height: 115px;
   position: relative;
