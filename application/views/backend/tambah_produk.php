@@ -122,7 +122,7 @@
                                     <div class="form-group after-add-more">
                                         <label class="col-md-12" for="upload-foto">Gambar</label>
                                         <div class="col-md-4">
-                                            <input type="file" name="file[]" class="form-control form-control-line"> 
+                                            <input type="file" name="file[]" class="form-control form-control-line" required> 
                                         </div>
                                         <div class="col-md-2">
                                             <button class="btn btn-sm btn-info btn-rounded add-more" type="button">
@@ -169,7 +169,7 @@
                                 <div class="form-group muncul" style="margin-top:10px">
                                     <!-- <label for="" class="col-md-12">Gambar</label> -->
                                     <div class="col-12 col-md-4">
-                                        <input type="file" name="file[]" class="form-control form-control-line" placeholder="Enter Name Here">
+                                        <input type="file" name="file[]" class="form-control form-control-line" required>
                                     </div>
                                     <div class="col-12 col-md-2">
                                         <button class="btn btn-sm btn-danger btn-rounded remove" type="button">

@@ -143,6 +143,15 @@ class M_produk extends CI_Model {
         return $this->db->insert($table, $data);
     }
 
+    function hapus($table, $where){
+        $data = $this->tampil_detail($where['id_produk']);
+        $gambar_pecah = explode(',', $data[0]->gambar);
+        foreach($gambar_pecah as $gp){
+            unlink("./assets/gambar/".$gp);
+        }
+        return $this->db->delete($table, $where);
+    }
+
 }
 
 /* End of file M_produk.php */

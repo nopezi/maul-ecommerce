@@ -46,7 +46,7 @@
                 <div class="row">
                 <?php $i=0; foreach($slide as $s): ?>
                     <div class="col-12 col-md-2 col-lg-4">
-                    <a type="button" data-toggle="modal" data-target=".bs-example-modal-sm<?=$s->id_slide?>">
+                    <a type="button" data-toggle="modal" data-target=".bs-example-modal-sm-pilihan<?=$s->id_slide?>">
                         <img src="<?=base_url()?>assets/gambar/<?=$s->gambar?>" class="img-responsive img-rounded">
                     </a>
                     </div>
@@ -86,6 +86,39 @@
                 </div>
                 <!-- tambah gambar -->
 
+                <!-- pilihan -->
+                <?php foreach($slide as $s): ?>
+                <div class="modal fade bs-example-modal-sm-pilihan<?=$s->id_slide?>" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
+                    <div class="modal-dialog modal-sm" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                            </div>
+                            <?php echo form_open_multipart('admin/hapus_slide'); ?>
+                            <!-- <div class="modal-body">
+                                <div class="form-group mt-2">
+                                    <div class="col-md-6">
+                                    <input type="hidden" name="id_slide" value="<?=$s->id_slide?>">
+                                    <a type="button" class="btn btn-warning" data-toggle="modal" data-target=".bs-example-modal-sm<?=$s->id_slide?>">Edit</a>
+                                    </div>
+                                    <div class="col-md-2">
+                                    <a type="button" class="btn btn-danger" data-toggle="modal" data-target=".bs-example-modal-sm-hapus<?=$s->id_slide?>">Hapus</a>
+                                    </div>
+                                </div>
+                            </div> -->
+                            <div class="modal-footer">
+                                <!-- <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                <button type="Submit" class="btn btn-primary">Hapus</button> -->
+                                <a type="button" class="btn btn-warning" data-toggle="modal" data-target=".bs-example-modal-sm<?=$s->id_slide?>">Edit</a>
+                                <a type="button" class="btn btn-danger" data-toggle="modal" data-target=".bs-example-modal-sm-hapus<?=$s->id_slide?>">Hapus</a>
+                            </div>
+                            <?php echo form_close();?>
+                        </div>
+                    </div>
+                </div>
+                <?php endforeach;?>
+                <!-- pilihan -->
+
                 <!-- edit gambar -->
                 <?php foreach($slide as $s): ?>
                 <div class="modal fade bs-example-modal-sm<?=$s->id_slide?>" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
@@ -114,6 +147,34 @@
                 </div>
                 <?php endforeach;?>
                 <!-- edit gambar -->
+
+                <!-- hapus gambar -->
+                <?php foreach($slide as $s): ?>
+                <div class="modal fade bs-example-modal-sm-hapus<?=$s->id_slide?>" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
+                    <div class="modal-dialog modal-sm" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">Hapus gambar
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                            </div>
+                            <?php echo form_open_multipart('admin/hapus_slide'); ?>
+                            <div class="modal-body">
+                            <p>Anda yakin menghapus foto ini ?</p>
+                                <div class="form-group mt-2">
+                                    <div class="col-12">
+                                    <input type="hidden" name="id_slide" value="<?=$s->id_slide?>">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-default" data-dismiss="modal">Tidak</button>
+                                <button type="Submit" class="btn btn-primary">Iya</button>
+                            </div>
+                            <?php echo form_close();?>
+                        </div>
+                    </div>
+                </div>
+                <?php endforeach;?>
+                <!-- hapus gambar -->
 
             </div>
             <!-- /.container-fluid -->

@@ -231,6 +231,15 @@ class Admin extends CI_Controller {
         // print_r(json_encode($data));
     }
 
+    function hapus_produk(){
+        $id_produk = $this->input->post('id_produk');
+        $data = array('id_produk' => $id_produk);
+        $hasil = $this->m_produk->hapus('produk', $data);
+        if($hasil == true){
+            redirect('admin/produk');
+        }
+    }
+
     /* END PRODUK */
 
     /* KATEGORI */
@@ -401,13 +410,28 @@ class Admin extends CI_Controller {
         
     }
 
+    function hapus_slide(){
+        $id_slide = $this->input->post('id_slide');
+        $data     = array('id_slide' => $id_slide);
+        $hasil    = $this->m_slide->hapus('gambar_slide',$id_slide);
+        // // print_r($hasil);
+        // echo $hasil;
+        if($hasil == true){
+            redirect('admin/slide');
+        }
+    }
+
     /* GAMBAR HEADER */
 
     /* HALAMAN TES */
 
     function tes(){
         $data['halaman'] = 'Halaman tes';
-        $this->load->view('backend/tes.php', $data);
+        // $this->load->view('backend/tes.php', $data);
+        // $data     = array('id_slide' => '2');
+        $data = 2;
+        $hasil = $this->m_slide->tampil_detail($data);
+        print_r($hasil);
     }
 
 }

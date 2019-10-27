@@ -75,8 +75,8 @@
                                             <img class="img-thumbnail" src="<?=base_url()?>assets/gambar/<?=$gambar[0]?>" height="10px" width="100px">
                                         </td>
                                         <td>
-                                            <a href=""><i class="fa fa-edit"></i></a>
-                                            <a href=""><i class="fa fa-trash"></i></a>
+                                            <a href="<?=base_url('admin/edit_produk')?>/<?=$dp->id_produk?>"><i class="fa fa-edit"></i></a>
+                                            <a type="button" data-toggle="modal" data-target=".bs-example-modal-sm<?=$dp->id_produk?>"><i class="fa fa-trash"></i></a>
                                         </td>
                                     </tr>
                                 <?php endforeach;?>
@@ -126,6 +126,35 @@
                         <!-- </div>
                     </div>
                 </div> -->
+
+            <!-- edit gambar -->
+            <?php foreach($data_produk as $s): ?>
+                <div class="modal fade bs-example-modal-sm<?=$s->id_produk?>" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
+                    <div class="modal-dialog modal-sm" role="document">
+                        <div class="modal-content">
+                            <!-- <div class="modal-header">Edit gambar
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                            </div> -->
+                            <?php echo form_open_multipart('admin/hapus_produk'); ?>
+                            <div class="modal-body">
+                                <p class="h6">Apakah anda yakin akan menghapus data ini ?</p>
+                                <div class="form-group mt-2">
+                                    <div class="col-12">
+                                        <input type="hidden" name="id_produk" value="<?=$s->id_produk?>">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-default" data-dismiss="modal">tidak</button>
+                                <button type="Submit" class="btn btn-primary">Hapus</button>
+                            </div>
+                            <?php echo form_close();?>
+                        </div>
+                    </div>
+                </div>
+            <?php endforeach;?>
+            <!-- edit gambar -->
+
             </div>
             <!-- /.container-fluid -->
             <?php $this->load->view('backend/core/footer'); ?>
