@@ -8,14 +8,16 @@ class Home extends CI_Controller {
         parent::__construct();
         $this->load->model('m_produk');
         $this->load->model('m_kategori');
+        $this->load->model('m_slide');
     }
     
 
     public function index()
     {
-        $produk       = $this->m_produk->tampil();
-        $kategori     = $this->m_kategori->tampil_kategori();
-        $produk_limit = $this->m_produk->tampil_limit();
+        $produk                = $this->m_produk->tampil();
+        $kategori              = $this->m_kategori->tampil_kategori();
+        $produk_limit          = $this->m_produk->tampil_limit();
+        $data['slide']         = $this->m_slide->tampil();
         $data['kategori']      = $this->m_kategori->tampil_kategori();
         $data['kategori_1']    = $this->m_produk->tampil_kategori_1();
         $data['kategori_2']    = $this->m_produk->tampil_kategori_2();

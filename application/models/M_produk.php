@@ -41,7 +41,7 @@ class M_produk extends CI_Model {
         $this->db->from('produk, kategori');
         $this->db->where('produk.id_kategori=kategori.id_kategori');
         $this->db->where('produk.id_kategori=1');
-        $this->db->limit('4');
+        $this->db->limit('5');
         $this->db->order_by('produk.id_kategori', 'ASC');
         return $this->db->get()->result();
     }

@@ -53,90 +53,96 @@
                         <?php echo form_open_multipart('admin/aksi_simpan_produk'); ?>
                             <div class="form-horizontal">
                                 <div class="form-material">
-                                <div class="form-group">
-                                    <label class="col-md-12">Nama Produk</label>
-                                    <div class="col-md-12">
-                                        <input type="text" name="nama_produk" placeholder="" class="form-control form-control-line" required> 
+                                    <div class="form-group">
+                                        <label class="col-md-12">Nama Produk</label>
+                                        <div class="col-md-12">
+                                            <input type="text" name="nama_produk" placeholder="" class="form-control form-control-line" required> 
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="form-group">
-                                    <label class="col-sm-12">Kategori</label>
-                                    <div class="col-sm-12">
-                                        <select name="kategori" class="form-control form-control-line" required>
-                                            <option value="">Pilih Kategori</option>
-                                        <?php foreach($kategori as $k): ?>
-                                            <option value="<?=$k->id_kategori?>"><?=$k->kategori?></option>
-                                        <?php endforeach; ?>
-                                        </select>
+                                    <div class="form-group">
+                                        <label class="col-sm-12">Kategori</label>
+                                        <div class="col-sm-12">
+                                            <select name="kategori" class="form-control form-control-line" required>
+                                                <option value="">Pilih Kategori</option>
+                                            <?php foreach($kategori as $k): ?>
+                                                <option value="<?=$k->id_kategori?>"><?=$k->kategori?></option>
+                                            <?php endforeach; ?>
+                                            </select>
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="form-group">
-                                    <label class="col-sm-12">Sub Kategori</label>
-                                    <div class="col-sm-12">
-                                    
-                                        <select name="sub_kategori" class="form-control form-control-line">
-                                            <option value="">Pilih Sub Kategori</option>
-                                        <?php 
-                                        foreach($kategori as $k){
-                                            $sub_kategori = explode(',', $k->sub_kategori);
-                                            foreach($sub_kategori as $sub_k){ 
-                                        ?>
-                                            <option><?=$sub_k?></option>
-                                        <?php }} ?>
-                                        </select>
-                                    
+                                    <div class="form-group">
+                                        <label class="col-sm-12">Sub Kategori</label>
+                                        <div class="col-sm-12">
+                                        
+                                            <select name="sub_kategori" class="form-control form-control-line" required>
+                                                <option value="">Pilih Sub Kategori</option>
+                                            <?php 
+                                            foreach($kategori as $k){
+                                                $sub_kategori = explode(',', $k->sub_kategori);
+                                                foreach($sub_kategori as $sub_k){ 
+                                            ?>
+                                                <option><?=$sub_k?></option>
+                                            <?php }} ?>
+                                            </select>
+                                        
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="form-group">
-                                    <label class="col-md-12">Harga</label>
-                                    <div class="col-md-12">
-                                        <input type="number" name="harga" placeholder="0" class="form-control form-control-line" required> 
+                                    <div class="form-group">
+                                        <label class="col-md-12">Warna</label>
+                                        <div class="col-md-12">
+                                            <input type="text" name="warna" id="fasilitas" class="form-control chips chips-placeholder" data-role="tagsinput"> 
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="form-group after-add-more-ukuran">
-                                    <div class="col-12 col-md-5 col-lg-2">
-                                        <label for="">Ukuran</label>
-                                        <input type="text" name="ukuran[]" placeholder="" class="form-control form-control-line"> 
+                                    <div class="form-group">
+                                        <label class="col-md-12">Harga</label>
+                                        <div class="col-md-12">
+                                            <input type="number" name="harga" placeholder="0" class="form-control form-control-line" required> 
+                                        </div>
                                     </div>
-                                    <div class="col-12 col-md-5 col-lg-2">
-                                        <label for="">Harga</label>
-                                        <input type="number" name="harga_ukuran[]" placeholder="" class="form-control form-control-line">
+                                    <div class="form-group after-add-more-ukuran">
+                                        <div class="col-12 col-md-5 col-lg-2">
+                                            <label for="">Ukuran</label>
+                                            <input type="text" name="ukuran[]" placeholder="" class="form-control form-control-line"> 
+                                        </div>
+                                        <div class="col-12 col-md-5 col-lg-2">
+                                            <label for="">Harga</label>
+                                            <input type="number" name="harga_ukuran[]" placeholder="" class="form-control form-control-line">
+                                        </div>
+                                        <div class="col-12 col-md-2 col-lg-2">
+                                            <button class="btn btn-sm btn-info btn-rounded add-more-ukuran" type="button">
+                                                <i class="fa fa-plus"></i>
+                                            </button>
+                                        </div>
                                     </div>
-                                    <div class="col-12 col-md-2 col-lg-2">
-                                        <button class="btn btn-sm btn-info btn-rounded add-more-ukuran" type="button">
-                                            <i class="fa fa-plus"></i>
-                                        </button>
+                                    <!-- <div class="form-group">
+                                        <div class="col-12">
+                                            <input type="file" name="gambar">
+                                        </div>
+                                    </div> -->
+                                    <div class="form-group after-add-more">
+                                        <label class="col-md-12" for="upload-foto">Gambar</label>
+                                        <div class="col-md-4">
+                                            <input type="file" name="file[]" class="form-control form-control-line"> 
+                                        </div>
+                                        <div class="col-md-2">
+                                            <button class="btn btn-sm btn-info btn-rounded add-more" type="button">
+                                                <i class="fa fa-plus"></i>
+                                            </button>
+                                        </div>
                                     </div>
-                                </div>
-                                <!-- <div class="form-group">
-                                    <div class="col-12">
-                                        <input type="file" name="gambar">
+                                    <div class="form-group">
+                                        <label class="col-md-12">Keterangan Produk</label>
+                                        <div class="col-md-12">
+                                            <textarea rows="5" class="form-control form-control-line" name="keterangan" required></textarea>
+                                        </div>
                                     </div>
-                                </div> -->
-                                <div class="form-group after-add-more">
-                                    <label class="col-md-12" for="upload-foto">Gambar</label>
-                                    <div class="col-md-4">
-                                        <input type="file" name="file[]" class="form-control form-control-line"> 
+                                    <div class="form-group">
+                                        <div class="col-sm-12">
+                                            <a href="<?=base_url('admin/produk')?>" class="btn btn-default">Kembali</a>
+                                            <!-- <button class="btn btn-success" type="submit">Simpan</button> -->
+                                            <input type="submit" name="upload" class="btn btn-info" value="Simpan">
+                                        </div>
                                     </div>
-                                    <div class="col-md-2">
-                                        <button class="btn btn-sm btn-info btn-rounded add-more" type="button">
-                                            <i class="fa fa-plus"></i>
-                                        </button>
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label class="col-md-12">Keterangan Produk</label>
-                                    <div class="col-md-12">
-                                        <textarea rows="5" class="form-control form-control-line" name="keterangan" required></textarea>
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <div class="col-sm-12">
-                                        <a href="<?=base_url('admin/produk')?>" class="btn btn-default">Kembali</a>
-                                        <!-- <button class="btn btn-success" type="submit">Simpan</button> -->
-                                        <input type="submit" name="upload" class="btn btn-info" value="Simpan">
-                                    </div>
-                                </div>
                                 </div>
                             </div>    
                         <!-- </form> -->

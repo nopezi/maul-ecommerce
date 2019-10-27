@@ -10,6 +10,7 @@ class Admin extends CI_Controller {
         $this->load->library('session');
         $this->load->model('m_kategori');
         $this->load->model('m_produk');
+        $this->load->model('m_slide');
         $this->load->helper(array('form', 'url'));
         if($this->session->userdata('status') != "login"){
             redirect(base_url("login"));
@@ -54,6 +55,7 @@ class Admin extends CI_Controller {
         $ukuran       = $this->input->post('ukuran');
         $harga_ukuran = $this->input->post('harga_ukuran');
         $keterangan   = $this->input->post('keterangan');
+        $warna        = $this->input->post('warna');
         $foto         = $this->input->post('file');
 
         $harga_ukuran = implode(',', $harga_ukuran);
@@ -112,6 +114,7 @@ class Admin extends CI_Controller {
                 'id_kategori'  => $kategori,
                 'sub_kategori' => $sub_kategori,
                 'harga'        => $harga,
+                'warna'        => $warna,
                 'ukuran'       => $ukuran,
                 'harga_ukuran' => $harga_ukuran,
                 'gambar'       => $nama_gambar_gabung,
@@ -284,11 +287,120 @@ class Admin extends CI_Controller {
     /* END KATEGORI */
 
     /* GAMBAR HEADER */
+    
     public function slide(){
         $data['halaman'] = 'Slider';
+        $data['slide']   = $this->m_slide->tampil();
         // $data['semua_kategori'] = $this->m_kategori->tampil_kategori();
         $this->load->view('backend/slider', $data);
     }
+
+    public function tambah_slide(){
+        $data['halaman'] = 'Tambah Slide';
+        $data['slide']   = $this->m_slide->tampil();
+        $this->load->view('backend/tambah_slider', $data);
+    }
+
+    public function aksi_tambah_slide(){
+
+        if($_FILES['gambar']){
+
+            $number_of_files = sizeof($_FILES['gambar']['tmp_name']);  
+            $files = $_FILES['gambar'];  
+            $config=array(  
+            'upload_path' => './assets/gambar/', //direktori untuk menyimpan gambar  
+            'allowed_types' => 'jpg|jpeg|png|gif',
+            'min-width' => '1600',
+            'min-height' => '707',  
+            // 'max_size' => '2000',  
+            // 'max_width' => '2000',  
+            // 'max_height' => '2000',
+            'encrypt_name' => TRUE  
+            );
+              
+                $_FILES['file']['name'] = $files['name'];  
+                $_FILES['file']['type'] = $files['type'];  
+                $_FILES['file']['tmp_name'] = $files['tmp_name'];  
+                $_FILES['file']['error'] = $files['error'];  
+                $_FILES['file']['size'] = $files['size'];  
+                $this->load->library('upload', $config);  
+                if($this->upload->do_upload('file')){
+                    $data[] = array('upload_data' => $this->upload->data());
+                    // $data[$i] = $this->upload->data();
+                    echo '<pre>';
+                    print_r($data);
+                    echo '<pre>';
+                    $gambar = $data[0]['upload_data']['file_name'];
+                    $data = array('gambar' => $gambar);
+                    $this->m_slide->tambah($data);
+                    redirect(base_url('admin/slide'));
+                }else{
+                    // $error = array('error' => $this->upload->display_errors());
+                    $error = $this->upload->display_errors();
+                    // echo '<pre>';
+                    // print_r($error);
+                    // echo $error;
+                    // echo '<pre>';
+        
+                    $this->session->set_flashdata('gagal', $error);
+                    redirect(base_url('admin/slide'));
+                } 
+        }
+
+        
+        
+    }
+
+    public function aksi_edit_slide(){
+
+        if($_FILES['gambar']){
+            $id_slide = $this->input->post('id_slide');
+            $number_of_files = sizeof($_FILES['gambar']['tmp_name']);  
+            $files = $_FILES['gambar'];  
+            $config=array(  
+            'upload_path' => './assets/gambar/', //direktori untuk menyimpan gambar  
+            'allowed_types' => 'jpg|jpeg|png|gif',
+            'min-width' => '1600',
+            'min-height' => '707',  
+            // 'max_size' => '2000',  
+            // 'max_width' => '2000',  
+            // 'max_height' => '2000',
+            'encrypt_name' => TRUE  
+            );
+              
+                $_FILES['file']['name'] = $files['name'];  
+                $_FILES['file']['type'] = $files['type'];  
+                $_FILES['file']['tmp_name'] = $files['tmp_name'];  
+                $_FILES['file']['error'] = $files['error'];  
+                $_FILES['file']['size'] = $files['size'];  
+                $this->load->library('upload', $config);  
+                if($this->upload->do_upload('file')){
+                    $data[] = array('upload_data' => $this->upload->data());
+                    // $data[$i] = $this->upload->data();
+                    echo '<pre>';
+                    print_r($data);
+                    echo '<pre>';
+                    $gambar = $data[0]['upload_data']['file_name'];
+                    $data = array('gambar' => $gambar);
+                    $this->m_slide->edit($data, array('id_slide' => $id_slide));
+                    redirect(base_url('admin/slide'));
+                }else{
+                    // $error = array('error' => $this->upload->display_errors());
+                    $error = $this->upload->display_errors();
+                    // echo '<pre>';
+                    // print_r($error);
+                    // echo $error;
+                    // echo '<pre>';
+        
+                    $this->session->set_flashdata('gagal', $error);
+                    redirect(base_url('admin/slide'));
+                } 
+        }
+
+        
+        
+    }
+
     /* GAMBAR HEADER */
 
     /* HALAMAN TES */
