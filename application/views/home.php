@@ -5,6 +5,7 @@
         </div>
     </div>
 </div>
+tes
 <?php //print_r($kategori_1); ?>
 <div class="container-fluid">
     <div class="row">
