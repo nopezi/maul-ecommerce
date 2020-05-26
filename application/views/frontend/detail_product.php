@@ -90,9 +90,11 @@
                                         <div class="col-12">
                                             <select class="mdb-select md-form" id="barang" name="ukuran" onchange="price()" required>
                                                 <option value="" disabled selected>Pilih Ukuran</option>
+                                            <?php if(!empty($ukuran)): ?>
                                                 <?php for($y=0; $y < sizeof($ukuran); $y++): ?>
                                                 <option value="<?='Rp '.number_format($harga_ukuran[$y])?>*<?=ucwords($ukuran[$y])?>"><?=ucwords($ukuran[$y])?></option>
                                                 <?php endfor;?>
+                                            <?php endif;?>
                                             </select>
                                             <label for="">Pilih Ukuran</label>
                                         </div>
