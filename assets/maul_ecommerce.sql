@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: May 16, 2020 at 02:28 AM
+-- Generation Time: Jun 10, 2020 at 03:47 PM
 -- Server version: 10.4.6-MariaDB
 -- PHP Version: 7.0.33
 
@@ -76,7 +76,7 @@ CREATE TABLE `kategori` (
 --
 
 INSERT INTO `kategori` (`id_kategori`, `kategori`, `sub_kategori`) VALUES
-(1, 'Baju', 'Kaos');
+(0, 'Baju', 'Kaos');
 
 -- --------------------------------------------------------
 
@@ -86,9 +86,10 @@ INSERT INTO `kategori` (`id_kategori`, `kategori`, `sub_kategori`) VALUES
 
 CREATE TABLE `produk` (
   `id_produk` int(11) NOT NULL,
-  `id_kategori` int(11) DEFAULT NULL,
+  `id_kategori` varchar(50) DEFAULT NULL,
   `nama_produk` varchar(50) DEFAULT NULL,
   `sub_kategori` varchar(50) DEFAULT NULL,
+  `warna` varchar(50) DEFAULT NULL,
   `harga` int(100) DEFAULT NULL,
   `gambar` varchar(500) DEFAULT NULL,
   `ukuran` varchar(50) DEFAULT NULL,
@@ -100,8 +101,9 @@ CREATE TABLE `produk` (
 -- Dumping data for table `produk`
 --
 
-INSERT INTO `produk` (`id_produk`, `id_kategori`, `nama_produk`, `sub_kategori`, `harga`, `gambar`, `ukuran`, `harga_ukuran`, `keterangan`) VALUES
-(1, 1, 'Kaos Hijrah', 'Kaos', 30000, '71c239ee5609cadcd3b0d9a1342b1725.jpg', NULL, NULL, NULL);
+INSERT INTO `produk` (`id_produk`, `id_kategori`, `nama_produk`, `sub_kategori`, `warna`, `harga`, `gambar`, `ukuran`, `harga_ukuran`, `keterangan`) VALUES
+(1, '1', 'Kaos Hijrah', 'Kaos', NULL, 30000, '71c239ee5609cadcd3b0d9a1342b1725.jpg', 'X', '30000', NULL),
+(3, '0', 'Kaos Mujahidin', 'Kaos', 'kuning', 20000, 'b5842c14c693f4c9a3a706330428aca3.png', 'm', '20000', 'tes');
 
 --
 -- Indexes for dumped tables
@@ -158,7 +160,7 @@ ALTER TABLE `kategori`
 -- AUTO_INCREMENT for table `produk`
 --
 ALTER TABLE `produk`
-  MODIFY `id_produk` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id_produk` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
