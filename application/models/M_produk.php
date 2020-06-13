@@ -32,7 +32,7 @@ class M_produk extends CI_Model {
         $this->db->select('*');
         $this->db->from('produk');
         // $this->db->where('produk.id_kategori=kategori.id_kategori');
-        $this->dn->join('kategori','kategori.id_kategori=produk.id_kategori');
+        $this->db->join('kategori','kategori.id_kategori=produk.id_kategori');
         $this->db->limit('5');
         $this->db->order_by('produk.id_kategori', 'ASC');
         return $this->db->get()->result();

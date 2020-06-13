@@ -19,8 +19,40 @@
                     Data Pembeli
                 </div>
                 <div class="card-body px-lg-5 pt-0">
-                    lorem5
+                    <form class="text-center" style="color: #757575;" action="#!">
+
+                      <div class="md-form">
+                        <input type="text" id="nama" class="form-control">
+                        <label for="nama">Nama Pembeli</label>
+                      </div>
+
+                      <div class="md-form">
+                        <input type="text" id="no_hp" class="form-control">
+                        <label for="no_hp">Nomor Hp</label>
+                      </div>
+
+                      <div class="md-form">
+                        <!-- <input type="text" id="alamat" class="form-control"> -->
+                        <textarea class="md-textarea form-control" rows="3"></textarea>
+                        <label for="alamat">Alamat</label>
+                      </div>
+
+                      <?php
+                        // $pesan = "Assalamualaikum kak, saya mau pesan ini \n*Nama Produk* : ".$order['nama_produk'];
+                        // $pesan .= " *Warna* : ".$order['warna']." *Ukuran* : ".$ukuran[1]." *Qty* ".$order['jumlah']."";
+                        $pesan = "Nama :   \n";
+                        $pesan .= "No Hp : \n";
+                        $pesan .= "Alamat : \n";
+                        $pesan .= "Keterangan : \n";
+                        $pesan .= "- Nama Produk\n";
+                        $pesan .= "- Warna\n";
+                        $pesan .= "- Ukuran\n";
+                        $pesan .= "- Belanja Berapa\n";
+                        ?>
+
+                    </form>
                 </div>
+                    <a href="https://api.whatsapp.com/send?phone=6281943214722&text=<?=urlencode($pesan)?>" target="_blank" class="btn btn-md btn-success card-footer"><i class="fab fa-whatsapp"></i> Pesan</a>
             </div>
         </div>
         <div class="col-12 col-md-6 col-lg-4">
@@ -72,19 +104,7 @@
                         </td>
                     </tr>
                 </table>
-                <?php
-                // $pesan = "Assalamualaikum kak, saya mau pesan ini \n*Nama Produk* : ".$order['nama_produk'];
-                // $pesan .= " *Warna* : ".$order['warna']." *Ukuran* : ".$ukuran[1]." *Qty* ".$order['jumlah']."";
-                $pesan = "Nama :   \n";
-                $pesan .= "No Hp : \n";
-                $pesan .= "Alamat : \n";
-                $pesan .= "Keterangan : \n";
-                $pesan .= "- Nama Produk\n";
-                $pesan .= "- Warna\n";
-                $pesan .= "- Ukuran\n";
-                $pesan .= "- Belanja Berapa\n";
-                ?>
-                <a href="https://api.whatsapp.com/send?phone=6281943214722&text=<?=urlencode($pesan)?>" target="_blank" class="btn btn-md btn-success"><i class="fab fa-whatsapp"></i> Pesan</a>
+                
             </div>
             <!-- card -->
         </div>
