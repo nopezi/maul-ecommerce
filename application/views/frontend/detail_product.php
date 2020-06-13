@@ -12,62 +12,43 @@
 
 <div class="container" style="margin-top:30px; margin-bottom: 101px">
     <div class="row">
+
         <div class="col-12">
             <div class="card">
                 <div class="card-body">
                     <div class="row">
-                        <div class="col-12 col-md-6 col-lg-5">
-                            <!--Carousel Wrapper-->
-                            <div id="carousel-example-1z" class="carousel slide carousel-fade mb-3" data-ride="carousel">
-                                <!--Indicators-->
-                                <?php $gambar = explode(',', $data_produk[0]->gambar); ?>
-                                <ol class="carousel-indicators">
-                                    <li data-target="#carousel-example-1z" data-slide-to="0" class="active"></li>
-                                    <?php for($i=1; $i < sizeof($gambar); $i++): ?>
-                                    <li data-target="#carousel-example-1z" data-slide-to="1"></li>
-                                    <?php endfor;?>
-                                    <!-- <li data-target="#carousel-example-1z" data-slide-to="2"></li> -->
-                                </ol>
-                                <!--/.Indicators-->
-                                <!--Slides-->
+                        <div class="col-12 col-md-6 col-lg-4">
+                            <div class="row justify-content-center">
+                                <div class="col-md-10">
                                 
-                                <div class="carousel-inner" role="listbox">
-                                    <!--First slide-->
-                                    <div class="carousel-item active">
-                                    <center>
-                                    <img class="d-block w-100" src="<?=base_url()?>assets/gambar/<?=trim($gambar[0])?>" 
-                                    alt="First slide" style="max-height: 350px; min-height: 350px;">
+                                    <!--Carousel Wrapper-->
+                                    <div id="carousel-example-1z" class="carousel slide carousel-fade mb-3" data-ride="carousel">
+
+                                        <div class="carousel-inner" role="listbox">
+                                            <?php for($i=0; $i < sizeof($data_produk[0]->foto); $i++): ?>
+                                                <?php $aktif = ($i == 0?'active':'haha');?>
+                                                <div class="carousel-item <?=$aktif?>">
+                                                    <img class="d-block w-100" src="<?=base_url()?>assets/gambar/<?=trim($data_produk[0]->foto[$i])?>"
+                                                        alt="Second slide" style="max-height: 300px; min-height: 300px">
+                                                </div>
+                                            <?php endfor;?>
+                                        </div>
+                                        <!--/.Slides-->
+                                        <!--Controls-->
+                                        <a class="carousel-control-prev" href="#carousel-example-1z" role="button" data-slide="prev">
+                                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                            <span class="sr-only">Previous</span>
+                                        </a>
+                                        <a class="carousel-control-next" href="#carousel-example-1z" role="button" data-slide="next">
+                                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                            <span class="sr-only">Next</span>
+                                        </a>
+                                        <!--/.Controls-->
                                     </div>
-                                    </center>
-                                    <!--/First slide-->
-                                    <!-- Second slide-->
-                                    <?php for($i=1; $i < sizeof($gambar); $i++): ?>
-                                    <div class="carousel-item">
-                                    <img class="d-block w-100" src="<?=base_url()?>assets/gambar/<?=trim($gambar[$i])?>"
-                                        alt="Second slide" style="max-height: 350px; min-height: 350px">
-                                    </div>
-                                    <?php endfor;?>
-                                    <!--/Second slide-->
-                                    <!--Third slide-->
-                                    <!-- <div class="carousel-item">
-                                    <img class="d-block w-100" src="https://distrodakwah.id/assets/uploads/featured_image/utama/am250p-red.jpeg"
-                                        alt="Third slide">
-                                    </div> -->
-                                    <!--/Third slide-->
+                                    <!--/.Carousel Wrapper-->
+
                                 </div>
-                                <!--/.Slides-->
-                                <!--Controls-->
-                                <a class="carousel-control-prev" href="#carousel-example-1z" role="button" data-slide="prev">
-                                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                                    <span class="sr-only">Previous</span>
-                                </a>
-                                <a class="carousel-control-next" href="#carousel-example-1z" role="button" data-slide="next">
-                                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                                    <span class="sr-only">Next</span>
-                                </a>
-                                <!--/.Controls-->
                             </div>
-                            <!--/.Carousel Wrapper-->
                         </div>
                         <div class="col-12 col-md-6 col-lg-6 offset-lg-1">
                             <!-- <div class="row"> -->

@@ -85,7 +85,8 @@ class Home extends CI_Controller
     public function detail($id)
     {
         if (!empty($id)) {
-            $data['data_produk'] = $this->m_produk->tampil_detail($id);
+            // $data['data_produk'] = $this->m_produk->tampil_detail($id);
+            $data['data_produk'] = $this->m_produk->tampil($id);
             $data['kategori'] = $this->m_kategori->tampil_kategori();
             $this->load->view('content/header', $data);
             $this->load->view('frontend/detail_product', $data);
@@ -156,8 +157,12 @@ class Home extends CI_Controller
             'jumlah' => $jumlah,
         );
 
+        // echo '<pre>';
+        // print_r($data);
+
         if (!empty($id_produk)) {
-            $this->load->view('content/header');
+            $data['kategori'] = $this->m_kategori->tampil_kategori();
+            $this->load->view('content/header', $data);
             $this->load->view('frontend/order_product', $data);
         } else {
             echo 'kosong';

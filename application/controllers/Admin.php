@@ -83,7 +83,7 @@ class Admin extends CI_Controller {
                 $_FILES['file']['size'] = $files['size'][$i];  
                 $this->load->library('upload', $config);  
                 if($this->upload->do_upload('file')){
-                    $data[] = array('upload_data' => $this->upload->data());
+                    $data_gambar[] = array('upload_data' => $this->upload->data());
                     // $data[$i] = $this->upload->data();
                     echo '<pre>';
                     // print_r(json_encode($data));
@@ -102,12 +102,8 @@ class Admin extends CI_Controller {
                  
             }
 
-            foreach($data as $dt){
-                $nama_gambar[] = $dt['upload_data']['file_name'];
-            }
-
             // print_r(json_encode($nama_gambar));
-            $nama_gambar_gabung = implode(',', $nama_gambar);
+            // $nama_gambar_gabung = implode(',', $nama_gambar);
 
             $data = array(
                 'nama_produk'  => $nama_produk,
@@ -117,15 +113,27 @@ class Admin extends CI_Controller {
                 'warna'        => $warna,
                 'ukuran'       => $ukuran,
                 'harga_ukuran' => $harga_ukuran,
-                'gambar'       => $nama_gambar_gabung,
+                // 'gambar'       => $nama_gambar_gabung,
                 'keterangan'   => $keterangan 
             );
 
-            $result = $this->m_produk->tambah('produk', $data);
+            $result = $this->m_produk->tambah($data);
+
+            foreach($data_gambar as $dt){
+                $data_gambar = [
+                    'id_produk' => $result[0]->id_produk,
+                    'gambar'    => $dt['upload_data']['file_name'],
+                ];
+                $gambar = $this->m_produk->tambah_gambar($data);
+                // $nama_gambar[] = $dt['upload_data']['file_name'];
+            }
+
             // echo $result;
             // print_r(json_encode($data));
-            if($result == true){
+            if($gambar) {
                 redirect('admin/produk');
+            } else {
+
             }
         }else{
             $error = 'kosong';

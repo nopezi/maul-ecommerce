@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Qaiza Shop</title>
     <link rel='icon' href='https://img.icons8.com/officel/16/000000/lock.png' type='image/x-icon' />
-    <link rel="stylesheet" href="<?=base_url()?>assets/css/bootstrap.min.css">
+    <!-- <link rel="stylesheet" href="<?=base_url()?>assets/css/bootstrap.min.css"> -->
     <link rel="stylesheet" href="<?php echo base_url() ?>assets/css/fontawesome-free-5.10.1-web/css/all.css">
     <!-- Bootstrap core CSS -->
     <link href="<?php echo base_url() ?>assets/css/bootstrap.min.css" rel="stylesheet">

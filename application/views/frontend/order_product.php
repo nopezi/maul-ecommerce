@@ -13,10 +13,20 @@
 </div>
 <div class="container" style="margin-bottom: 100px"><?php //print_r($order); ?>
     <div class="row justify-content-center">
+        <div class="col-12 col-md-6 col-lg-7">
+            <div class="card">
+                <div class="card-header success-color white-text text-center">
+                    Data Pembeli
+                </div>
+                <div class="card-body px-lg-5 pt-0">
+                    lorem5
+                </div>
+            </div>
+        </div>
         <div class="col-12 col-md-6 col-lg-4">
             <div class="card">
-                <div class="card-header">
-                    <div class="text-center">
+                <div class="card-header success-color">
+                    <div class="text-center white-text">
                         Data Pesanan
                     </div>
                 </div>
@@ -63,10 +73,18 @@
                     </tr>
                 </table>
                 <?php
-                $pesan = "Assalamualaikum min, saya mau pesan ini *Nama Produk* : ".$order['nama_produk'];
-                $pesan .= " *Warna* : ".$order['warna']." *Ukuran* : ".$ukuran[1]." *Qty* ".$order['jumlah']."";
+                // $pesan = "Assalamualaikum kak, saya mau pesan ini \n*Nama Produk* : ".$order['nama_produk'];
+                // $pesan .= " *Warna* : ".$order['warna']." *Ukuran* : ".$ukuran[1]." *Qty* ".$order['jumlah']."";
+                $pesan = "Nama :   \n";
+                $pesan .= "No Hp : \n";
+                $pesan .= "Alamat : \n";
+                $pesan .= "Keterangan : \n";
+                $pesan .= "- Nama Produk\n";
+                $pesan .= "- Warna\n";
+                $pesan .= "- Ukuran\n";
+                $pesan .= "- Belanja Berapa\n";
                 ?>
-                <a href="https://api.whatsapp.com/send?phone=6281943214722&text=<?=$pesan?>" target="_blank" class="btn btn-md btn-success"><i class="fab fa-whatsapp"></i> Pesan</a>
+                <a href="https://api.whatsapp.com/send?phone=6281943214722&text=<?=urlencode($pesan)?>" target="_blank" class="btn btn-md btn-success"><i class="fab fa-whatsapp"></i> Pesan</a>
             </div>
             <!-- card -->
         </div>

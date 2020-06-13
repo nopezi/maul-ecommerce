@@ -2,28 +2,37 @@
 
 class M_produk extends CI_Model {
 
-    function tampil(){
-        $this->db->select('produk.id_produk, 
-                           produk.id_kategori, 
-                           produk.nama_produk,
-                           produk.sub_kategori,
-                           produk.harga,
-                           produk.gambar,
-                           produk.ukuran,
-                           produk.harga_ukuran,
-                           produk.keterangan,
-                           kategori.id_kategori,
-                           kategori.kategori');
-        $this->db->from('produk, kategori');
-        $this->db->where('produk.id_kategori=kategori.id_kategori');
+    function tampil($id = null){
+        $this->db->select('*');
+        $this->db->from('produk');
+        $this->db->join('kategori','kategori.id_kategori=produk.id_kategori');
+        // $this->db->where('produk.id_kategori=kategori.id_kategori');
         $this->db->order_by('produk.id_kategori', 'ASC');
-        return $this->db->get()->result();
+
+        if(!empty($id)) {
+          $this->db->where('produk.id_produk', $id);
+        }
+
+        $produk = $this->db->get()->result();
+
+        foreach ($produk as $p) {
+          
+            $gambar = $this->db->get_where('gambar', array('id_produk'=>$p->id_produk))->result();
+
+            foreach ($gambar as $g) {
+                $p->foto[] = $g->gambar;
+            }
+
+        }
+
+        return $produk;
     }
 
     function tampil_limit(){
-        $this->db->select('produk.*, kategori.*');
-        $this->db->from('produk, kategori');
-        $this->db->where('produk.id_kategori=kategori.id_kategori');
+        $this->db->select('*');
+        $this->db->from('produk');
+        // $this->db->where('produk.id_kategori=kategori.id_kategori');
+        $this->dn->join('kategori','kategori.id_kategori=produk.id_kategori');
         $this->db->limit('5');
         $this->db->order_by('produk.id_kategori', 'ASC');
         return $this->db->get()->result();
@@ -139,8 +148,36 @@ class M_produk extends CI_Model {
         return $this->db->get()->result();
     }
 
-    function tambah($table, $data){
-        return $this->db->insert($table, $data);
+    function tambah($data){
+         $this->db->insert('produk', $data);
+         $sukses = $this->db->affected_rows();
+
+         if ($sukses) {
+
+            $last_id = $this->db->insert_id();
+            return $inserted_data = $this->db->get_where('produk', array('id' => $last_id))->result();
+
+         } else {
+
+            return false;
+         
+         }
+    }
+
+    function tambah_gambar($data){
+         $this->db->insert('gambar', $data);
+         $sukses = $this->db->affected_rows();
+
+         if ($sukses) {
+
+            $last_id = $this->db->insert_id();
+            return $inserted_data = $this->db->get_where('gambar', array('id' => $last_id))->result();
+
+         } else {
+
+            return false;
+         
+         }
     }
 
     function hapus($table, $where){

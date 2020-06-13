@@ -2,7 +2,7 @@
 
     <div class="carousel-inner v-2" role="listbox">
         
-        <div class="carousel-item active">
+        <!-- <div class="carousel-item active">
             <div class="col-12 col-md-4">
                 <div class="card mb-2">
                 <?php $gambar = explode(',', $produk_limit[0]->gambar); ?>
@@ -15,24 +15,28 @@
                     </div>
                 </div>
             </div>
-        </div>
-        <?php for($i=1; $i < sizeof($produk_limit); $i++): ?>
-        <?php if($i >=5){break;}?>
-        <div class="carousel-item">
+        </div> -->
+    <?php 
+    // for($i=1; $i < sizeof($produk_limit); $i++):
+    $i=0;
+    foreach ($produk_limit as $pt):
+    ?>
+        <?php $aktif = ($i++ == 0?'active':''); ?>
+        <div class="carousel-item <?=$aktif?>">
             <div class="col-12 col-md-4">
                 <div class="card mb-2">
-                <?php $gambar = explode(',', $produk_limit[$i]->gambar); ?>
+                <?php $gambar = explode(',', $pt->gambar); ?>
                     <img class="card-img-top" src="<?=base_url()?>assets/gambar/<?=$gambar[0]?>"
                         alt="Card image cap" style="max-height: 300px; min-height: 300px">
                     <div class="card-body text-center">
-                        <h4 class="card-title font-weight-bold"><?=$produk_limit[$i]->nama_produk?></h4>
-                        <p class="h6 orange-text"><?='Rp '.number_format($produk_limit[$i]->harga)?></p>
-                        <a type="button" href="<?=base_url('home/detail')?>/<?=$produk_limit[$i]->id_produk?>" class="col-md-12 btn btn-md btn-rounded warning-color-dark text-center">Pilih Variant</a>
+                        <h4 class="card-title font-weight-bold"><?=$pt->nama_produk?></h4>
+                        <p class="h6 orange-text"><?='Rp '.number_format($pt->harga)?></p>
+                        <a type="button" href="<?=base_url('home/detail')?>/<?=$pt->id_produk?>" class="col-md-12 btn btn-md btn-rounded warning-color-dark text-center">Pilih Variant</a>
                     </div>
                 </div>
             </div>
         </div>
-        <?php endfor ?>
+    <?php endforeach ?>
 
     </div>
 
