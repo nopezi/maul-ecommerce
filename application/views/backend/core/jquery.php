@@ -24,6 +24,7 @@
 <script type="text/javascript" src="<?php echo base_url() ?>assets/js/addons/datatables.min.js"></script>
 <script type="text/javascript" src="<?php echo base_url() ?>assets/js/bootstrap-tagsinput.js"></script>
 <!-- <script type="text/javascript" src="<?php echo base_url() ?>assets/js/bootstrap-tagsinput-angular.js"></script> -->
+<script type="text/javascript" src="<?php echo base_url() ?>assets/js/sweetalert.min.js"></script>
 <script>
 $(document).ready(function () {
 $('#dtBasicExample').DataTable({
@@ -35,6 +36,17 @@ $('#dtBasicExample').DataTable({
     "bFilter": true,
     "bInfo": false,
     "bAutoWidth": true,
+});
+$('#pembeli').DataTable({
+	 "aaSorting": [[5, "desc" ]]
+    // "scrollX" : true,
+    // "searching": true,
+    // "bPaginate": true,
+    // "bDestroy": false,
+    // "bLengthChange": true,
+    // "bFilter": true,
+    // "bInfo": false,
+    // "bAutoWidth": true,
 });
 $('.dataTables_length').addClass('bs-select');
 });

@@ -41,7 +41,7 @@
                 <div class="row">
                     <div class="col-md-12 col-lg-12 col-sm-12">
                         <div class="white-box">
-                            <div class="col-md-3 col-sm-4 col-xs-6 pull-right">
+                            <!-- <div class="col-md-3 col-sm-4 col-xs-6 pull-right">
                                 <select class="form-control pull-right row b-none">
                                     <option>March 2017</option>
                                     <option>April 2017</option>
@@ -49,7 +49,7 @@
                                     <option>June 2017</option>
                                     <option>July 2017</option>
                                 </select>
-                            </div>
+                            </div> -->
                             <!-- <h3 class="box-title">Recent sales</h3> -->
                             <?php 
                             for($y=0; $y < sizeof($semua_kategori); $y++){

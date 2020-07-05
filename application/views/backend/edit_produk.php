@@ -2,7 +2,7 @@
 <html lang="en">
 
 <?php $this->load->view('backend/core/header'); ?>
-
+<?php //die(var_dump($produk));?>
 <body class="fix-header">
     <!-- ============================================================== -->
     <!-- Preloader -->
@@ -49,7 +49,7 @@
                         </button>
                         </div>
                         <?php endif; ?>
-                        <?php echo form_open_multipart('admin/aksi_edit_produk'); ?>
+                        <?php echo form_open_multipart('admin/aksi_edit_produk/'.$produk[0]->id_produk); ?>
                             <div class="form-horizontal">
                                 <div class="form-material">
                                 <div class="form-group">
@@ -108,8 +108,8 @@
                                     </div>
                                 </div>
                             <?php 
-                            $ukuran = explode(',', $produk[0]->ukuran); 
-                            $harga_ukuran = explode(',', $produk[0]->harga_ukuran);
+                            // $ukuran = explode(',', $produk[0]->ukuran); 
+                            // $harga_ukuran = explode(',', $produk[0]->harga_ukuran);
                             ?>
                             <?php for($y=0; $y < sizeof($ukuran); $y++): ?>
                                 <?php if($y < 1){ ?>
@@ -117,11 +117,12 @@
                                 
                                     <div class="col-12 col-md-5 col-lg-2">
                                         <label for="">Ukuran</label>
-                                        <input type="text" name="ukuran[]" value="<?=$ukuran[$y]?>" class="form-control form-control-line"> 
+                                        <input type="hidden" name="id_ukuran[]" value="<?=$ukuran[$y]->id?>">
+                                        <input type="text" name="ukuran[]" value="<?=$ukuran[$y]->ukuran?>" class="form-control form-control-line"> 
                                     </div>
                                     <div class="col-12 col-md-5 col-lg-2">
                                         <label for="">Harga</label>
-                                        <input type="number" name="harga_ukuran[]" value="<?=$harga_ukuran[$y]?>" class="form-control form-control-line">
+                                        <input type="number" name="harga_ukuran[]" value="<?=$ukuran[$y]->harga?>" class="form-control form-control-line">
                                     </div>
                                     <div class="col-12 col-md-2 col-lg-2">
                                         <button class="btn btn-sm btn-info btn-rounded add-more-ukuran" type="button">
@@ -134,62 +135,46 @@
                                     <div class="form-group muncul-ukuran">
                                     <div class="col-md-2">
                                         <!-- <label for="">Ukuran</label> -->
-                                        <input type="text" name="ukuran[]" value="<?=$ukuran[$y]?>" class="form-control form-control-line"> 
+                                        <input type="hidden" name="id_ukuran[]" value="<?=$ukuran[$y]->id?>">
+                                        <input type="text" name="ukuran[]" value="<?=$ukuran[$y]->ukuran?>" class="form-control form-control-line"> 
                                     </div>
                                     <div class="col-md-2">
                                         <!-- <label for="">Harga</label> -->
-                                        <input type="number" name="harga_ukuran[]" value="<?=$harga_ukuran[$y]?>" class="form-control form-control-line">
+                                        <input type="number" name="harga_ukuran[]" value="<?=$ukuran[$y]->harga?>" class="form-control form-control-line">
                                     </div>
                                     <div class="col-md-2"> 
-                                        <button class="btn btn-sm btn-danger btn-rounded remove-ukuran" type="button">
+                                        <button class="btn btn-sm btn-danger btn-rounded remove-ukuran" type="button" onclick="hapus_ukuran(<?=$ukuran[$y]->id?>)">
                                             <i class="fa fa-minus"></i>
                                         </button>
                                     </div>
                                 </div>
                                 <?php } ?>
                             <?php endfor;?>
-
-                            <?php  $gambar = explode(',', $produk[0]->gambar); ?>
-                            <?php for($i=0; $i < sizeof($gambar); $i++): ?>
-                                <?php if($i < 1){ ?>
-                                <div class="form-group after-add-more">
-                                    <label class="col-md-12" for="upload-foto">Gambar</label>
-                                    <div class="col-md-4">
-                                        <input type="file" name="file[]" class="form-control form-control-line">
-                                        <input type="hidden" name="file[]" value="<?=$gambar[$i]?>"> 
-                                    </div>
-                                    <div class="col-md-2">
-                                        <button class="btn btn-sm btn-info btn-rounded add-more" type="button">
-                                            <i class="fa fa-plus"></i>
-                                        </button>
-                                    </div>
-                                    <div class="col-md-2">
-                                        <img src="<?=base_url()?>assets/gambar/<?=$gambar[$i]?>" class="img-thumbnail" style="max-height: 100px; max-width: 100px">
-                                    </div>
+                            <div class="form-group">
+                                <label class="col-12 col-md-12" for="upload-foto">Gambar</label>
+                                <div class="col-md-4">
+                                    <!-- <input type="file" name="file[]" class="form-control form-control-line" required>  -->
+                                    <input type="file" name="file[]" class="form-control form-control-line"  multiple> 
                                 </div>
-                                <?php }else{ ?>
-                                <div class="form-group muncul" style="margin-top:10px">
-                                    <div class="col-12 col-md-4">
-                                        <input type="file" name="file[]" class="form-control form-control-line" placeholder="Enter Name Here">
-                                        <input type="hidden" name="file[]" value="<?=$gambar[$i]?>">
-                                    </div>
-                                    <div class="col-12 col-md-2">
-                                        <button class="btn btn-sm btn-danger btn-rounded remove" type="button">
-                                            <i class="fa fa-minus"></i>
-                                        </button>
-                                    </div>
-                                    <div class="col-md-2">
-                                        <img src="<?=base_url()?>assets/gambar/<?=$gambar[$i]?>" class="img-thumbnail" style="max-height: 100px; max-width: 100px">
-                                    </div>
+                            </div>
+                            <?php if(!empty($produk[0]->foto)): ?>
+                                <div class="form-group">
+                                    <!-- <?php $n=0;  foreach($produk[0]->foto as $foto):?>
+                                        <div class="col-xs-6 col-md-3">
+                                            <a type="button" data-toggle="modal" class="thumbnail" data-target=".bs-example-modal-sm-hapus<?=$produk[0]->id_foto[$n]?>">
+                                                <img src="<?=base_url()?>assets/gambar/<?=$foto?>" class="img-responsive img-rounded">
+                                            </a>
+                                        </div>
+                                    <?php $n++; endforeach;?> -->
+                                    <div id="muncul-gambar"></div>
                                 </div>
-                                <?php } ?>
-                            <?php endfor; ?>
+                            <?php endif;?>
                                 <div class="form-group">
                                     <label class="col-md-12">Keterangan Produk</label>
                                     <div class="col-md-12">
-                                        <textarea rows="5" class="form-control form-control-line" name="keterangan" required>
-                                            <?=$produk[0]->keterangan?>
-                                        </textarea>
+<textarea rows="5" class="form-control form-control-line" name="keterangan" required>
+<?=$produk[0]->keterangan?>
+</textarea>
                                     </div>
                                 </div>
                                 <div class="form-group">
@@ -238,6 +223,37 @@
                 </div>
             </div>
             <!-- /.container-fluid -->
+
+            <!-- modal hapus gambar -->
+        <?php if(!empty($produk[0]->id_foto)):?>
+            <?php foreach($produk[0]->id_foto as $s): ?>
+            <div class="modal fade bs-example-modal-sm-hapus<?=$s?>" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
+                <div class="modal-dialog modal-sm" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">Hapus gambar
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        </div>
+
+                        <div class="modal-body">
+                        <p>Anda yakin menghapus foto ini ?</p>
+                            <div class="form-group mt-2">
+                                <div class="col-12">
+                                <input type="hidden" name="id_gambar" value="<?=$s?>">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Tidak</button>
+                            <button type="button" class="btn btn-primary" onclick="hapus_gambar(<?=$s?>)" data-dismiss="modal">Iya</button>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            <?php endforeach;?>
+            <!-- modal hapus gambar -->
+        <?php endif;?>
+
             <?php $this->load->view('backend/core/footer'); ?>
         </div>
         <!-- ============================================================== -->
@@ -251,6 +267,52 @@
     <!-- All Jquery -->
     <!-- ============================================================== -->
     <?php $this->load->view('backend/core/jquery'); ?>
+
+    <script type="text/javascript">
+        var id_produk = '<?=$produk[0]->id_produk?>';
+        tampil_gambar(id_produk);
+
+        function tampil_gambar(id_produk) {
+            $.ajax({
+                type  : 'GET',
+                // dataType : 'JSON',
+                url   : '<?=base_url('admin/tampil_gambar')?>',
+                async : true,
+                data  : 'id_produk='+id_produk,
+                success : function(response) {
+                    // console.log(response);
+                    $('#muncul-gambar').html(response);
+                }
+            });
+        }
+
+        function hapus_gambar(id_gambar) {
+            $.ajax({
+                type : 'GET',
+                url  : '<?=base_url('admin/hapus_gambar')?>',
+                async : true,
+                data  : 'id_gambar='+id_gambar,
+                success : function(response) {
+                    // console.log(response);
+                    tampil_gambar(id_produk);
+                }
+
+            });
+            
+        }
+
+        function hapus_ukuran(id_ukuran) {
+            $.ajax({
+                type : 'GET',
+                url  : '<?=base_url('admin/hapus_ukuran')?>',
+                async : true,
+                data  : 'id_ukuran='+id_ukuran,
+                success : function(response) {
+                }
+            });
+        }
+    </script>
+
     <script type="text/javascript">
         $(document).ready(function(){
             // harga dan ukuran
@@ -275,6 +337,21 @@
             // gambar
         });
     </script>
+    <?php if(!empty($this->session->flashdata('edit_data'))):?>
+        <?php if($this->session->flashdata('edit_data') == 'berhasil'): ?>
+        <script type="text/javascript">
+            swal("Sukses", "Data produk berhasil di edit", "success");
+        </script>
+        <?php elseif($this->session->flashdata('edit_data') == 'foto_kosong'): ?>
+            <script type="text/javascript">
+            swal("Gagal", "Foto tidak boleh kosong", "error");
+            </script>
+        <?php else:?>
+            <script type="text/javascript">
+            swal("Gagal", "Data produk gagal di edit", "error");
+            </script>
+        <?php endif;?>
+    <?php endif;?>
 </body>
 
 </html>

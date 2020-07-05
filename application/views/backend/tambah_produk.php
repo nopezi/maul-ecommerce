@@ -119,7 +119,7 @@
                                             <input type="file" name="gambar">
                                         </div>
                                     </div> -->
-                                    <div class="form-group after-add-more">
+                                    <!-- <div class="form-group after-add-more">
                                         <label class="col-md-12" for="upload-foto">Gambar</label>
                                         <div class="col-md-4">
                                             <input type="file" name="file[]" class="form-control form-control-line" required> 
@@ -128,6 +128,12 @@
                                             <button class="btn btn-sm btn-info btn-rounded add-more" type="button">
                                                 <i class="fa fa-plus"></i>
                                             </button>
+                                        </div>
+                                    </div> -->
+                                    <div class="form-group after-add-more">
+                                        <label class="col-md-12" for="upload-foto">Gambar</label>
+                                        <div class="col-md-4">
+                                            <input type="file" name="file[]" class="form-control form-control-line" required multiple> 
                                         </div>
                                     </div>
                                     <div class="form-group">

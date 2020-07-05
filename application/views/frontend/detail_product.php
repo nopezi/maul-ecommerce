@@ -25,6 +25,7 @@
                                     <div id="carousel-example-1z" class="carousel slide carousel-fade mb-3" data-ride="carousel">
 
                                         <div class="carousel-inner" role="listbox">
+                                        <?php if(!empty($data_produk[0]->foto)):?>
                                             <?php for($i=0; $i < sizeof($data_produk[0]->foto); $i++): ?>
                                                 <?php $aktif = ($i == 0?'active':'haha');?>
                                                 <div class="carousel-item <?=$aktif?>">
@@ -32,6 +33,7 @@
                                                         alt="Second slide" style="max-height: 300px; min-height: 300px">
                                                 </div>
                                             <?php endfor;?>
+                                        <?php endif;?>
                                         </div>
                                         <!--/.Slides-->
                                         <!--Controls-->

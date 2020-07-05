@@ -61,6 +61,13 @@ class Admin extends CI_Controller {
         $harga_ukuran = implode(',', $harga_ukuran);
         $ukuran = implode(',', $ukuran);
 
+        $gambar = $_FILES['file'];
+
+        // for($i=0; $i<sizeof($gambar['name']); $i++){
+        //     // echo $data_gambar['name'][$i].'<br>';
+        //     unlink("./assets/gambar/".$data_gambar['name'][$i]);
+        // }
+
         if($_FILES['file'])  
         {  
             $number_of_files = sizeof($_FILES['file']['tmp_name']);  
@@ -113,7 +120,6 @@ class Admin extends CI_Controller {
                 'warna'        => $warna,
                 'ukuran'       => $ukuran,
                 'harga_ukuran' => $harga_ukuran,
-                // 'gambar'       => $nama_gambar_gabung,
                 'keterangan'   => $keterangan 
             );
 
@@ -124,8 +130,8 @@ class Admin extends CI_Controller {
                     'id_produk' => $result[0]->id_produk,
                     'gambar'    => $dt['upload_data']['file_name'],
                 ];
-                $gambar = $this->m_produk->tambah_gambar($data);
-                // $nama_gambar[] = $dt['upload_data']['file_name'];
+                $gambar = $this->m_produk->tambah_gambar($data_gambar);
+                $nama_gambar[] = $dt['upload_data']['file_name'];
             }
 
             // echo $result;
@@ -143,26 +149,30 @@ class Admin extends CI_Controller {
     }
 
     function edit_produk($id){
-        // $this->m_produk;
+
         $data['halaman']  = 'Edit Produk';
-        $data['produk']   = $this->m_produk->tampil_detail($id);
+        $data['ukuran']   = $this->db->get_where('ukuran', array('id_produk' => $id))->result();
+        $data['produk']   = $this->m_produk->tampil($id, null,null);
         $data['kategori'] = $this->m_kategori->tampil_kategori();
         $this->load->view('backend/edit_produk', $data);
+        // echo '<pre>';
+        // print_r($data['produk']);
     }
 
-    function aksi_edit_produk(){
+    function aksi_edit_produk($id_produk_awal){
         $nama_produk  = $this->input->post('nama_produk');
         $id_produk    = $this->input->post('id_produk');
         $id_kategori  = $this->input->post('kategori');
         $sub_kategori = $this->input->post('sub_kategori');
         $keterangan   = $this->input->post('keterangan');
         $harga        = $this->input->post('harga');
+        $id_ukuran    = $this->input->post('id_ukuran');
         $ukuran       = $this->input->post('ukuran');
         $harga_ukuran = $this->input->post('harga_ukuran');
-        $file2         = $this->input->post('file');
+        $file2        = $this->input->post('file');
 
-        if($_FILES['file'])  
-        {  
+        if(!empty($_FILES['file'])) {  
+
             $number_of_files = sizeof($_FILES['file']['tmp_name']);  
             $files = $_FILES['file'];  
             $config=array(  
@@ -183,69 +193,109 @@ class Admin extends CI_Controller {
                 $_FILES['file']['size']     = $files['size'][$i];  
                 $this->load->library('upload', $config);  
                 if($this->upload->do_upload('file')){
-                    $data[] = array('upload_data' => $this->upload->data());
+                    $data_gambar[] = array('upload_data' => $this->upload->data());
                     // $data[$i] = $this->upload->data();
-                    echo '<pre>';
-                    print_r($data);
-                    echo '<pre>';
+                    // echo '<pre>';
+                    // print_r($data);
+                    // echo '<pre>';
                     // echo $data[];
                 }else{
                     // $error = array('error' => $this->upload->display_errors());
                     $error = $this->upload->display_errors();
-                    echo '<pre>';
-                    print_r($error);
-                    echo '<pre>';
-                    // echo $i;
                     $data2[] = $file2[$i];
-                    // print_r($file2);
-        
                     // $this->session->set_flashdata('gagal', $error);
                     // redirect(base_url('admin/tambah_produk'));
                 } 
                  
             }
-            echo '<br>';
-            print_r($data);
-            print_r($data2);
 
-            foreach($data as $dt){
-                $nama_gambar[] = $dt['upload_data']['file_name'];
+            if (!empty($data_gambar)) {
+                foreach($data_gambar as $dt){
+                    $nama_gambar[] = $dt['upload_data']['file_name'];
+                    $id_produk = $this->m_produk->edit_gambar($dt['upload_data']['file_name'], $id_produk);
+                }
+            } else {
+                $cek_gambar = $this->db->get_where('gambar', array('id_produk' => $id_produk_awal))->result();
+                if(empty($cek_gambar)) {
+                    $this->session->set_flashdata('edit_data', 'foto_kosong');
+                    redirect('admin/edit_produk/'.$id_produk_awal);
+                }
             }
+
             
-            $gabung = array_merge($nama_gambar, $data2);
-
-            print_r($gabung);
-
-            // $nama_gambar_gabung = implode(',', $nama_gambar);
-
-            // echo $result;
-            // print_r(json_encode($data));
-            // if($result == true){
-            //     redirect('admin/produk');
-            // }
         }
 
-        // $data = array(
+        $data_produk = [
+            'nama_produk'  => $nama_produk,
+            'id_kategori'  => $id_kategori,
+            'sub_kategori' => $sub_kategori,
+            'harga'        => $harga,
+            'keterangan'   => $keterangan
+        ];
+
+        $hasil_edit_produk = $this->m_produk->edit_produk($data_produk, $id_produk_awal);
+        // echo $id_produk;
+        // $data = [
         //     'nama_produk'  => $nama_produk,
         //     'id_kategori'  => $id_kategori,
         //     'sub_kategori' => $sub_kategori,
         //     'harga'        => $harga,
-        //     'ukuran'       => $ukuran,
-        //     'harga_ukuran' => $harga_ukuran,
-        //     // 'gambar'       => $nama_gambar_gabung,
-        //     'keterangan'   => $keterangan 
-        // );
+        //     'keterangan'   => $keterangan,
+        //     'id_produk' => $id_produk,
+        //     'ukuran'    => $ukuran,
+        //     'harga_ukuran'     => $harga_ukuran,
+        // ];
+        // echo "<pre>";
+        // print_r($data);
 
-        // print_r(json_encode($data));
+        for ($y=0; $y < sizeof($ukuran); $y++) { 
+            $data_ukuran = [
+                'id_produk' => $id_produk_awal,
+                'ukuran'    => $ukuran[$y],
+                'harga'     => $harga_ukuran[$y],
+            ];
+            if(!empty($id_ukuran[$y])) {
+                $this->db->update('ukuran', $data_ukuran, array('id' => $id_ukuran[$y]));
+            } else {
+                $this->db->insert('ukuran', $data_ukuran);
+            }
+        }
+        
+
+        if(!empty($ukuran)) {
+            $this->session->set_flashdata('edit_data', 'berhasil');
+            redirect('admin/edit_produk/'.$id_produk_awal);
+        } else {
+            $this->session->set_flashdata('edit_data', 'gagal');
+            redirect('admin/edit_produk/'.$id_produk_awal);
+        }
+
     }
 
     function hapus_produk(){
         $id_produk = $this->input->post('id_produk');
-        $data = array('id_produk' => $id_produk);
-        $hasil = $this->m_produk->hapus('produk', $data);
-        if($hasil == true){
-            redirect('admin/produk');
+
+        $data = $this->db->get_where('gambar',array('id_produk' => $id_produk))->result();
+        if(!empty($data)) {
+
+          foreach($data as $gp){
+              unlink("./assets/gambar/".$gp->gambar);
+          }
+
         }
+        
+        $this->db->delete('produk', array('id_produk' => $id_produk));
+        $this->db->delete('gambar', array('id_produk' => $id_produk));
+
+        // $hasil = $this->m_produk->hapus('produk', $id_produk);
+        // if($hasil == true){
+            redirect('admin/produk');
+        // }
+    }
+
+    function hapus_ukuran() {
+        $id_ukuran = $this->input->get('id_ukuran');
+        $this->db->delete('ukuran', array('id' => $id_ukuran));
     }
 
     /* END PRODUK */
@@ -273,6 +323,7 @@ class Admin extends CI_Controller {
         $this->m_kategori->tambah('kategori', $data);
         redirect('admin/kategori');
     }
+
     function edit_kategori($id_kategori){
         $data['kategori'] = $this->m_kategori->tampil_kategori_id('kategori', array('id_kategori' => $id_kategori));
         $data['halaman'] = 'Edit Kategori';
@@ -344,9 +395,9 @@ class Admin extends CI_Controller {
                 if($this->upload->do_upload('file')){
                     $data[] = array('upload_data' => $this->upload->data());
                     // $data[$i] = $this->upload->data();
-                    echo '<pre>';
-                    print_r($data);
-                    echo '<pre>';
+                    // echo '<pre>';
+                    // print_r($data);
+                    // echo '<pre>';
                     $gambar = $data[0]['upload_data']['file_name'];
                     $data = array('gambar' => $gambar);
                     $this->m_slide->tambah($data);
@@ -431,15 +482,74 @@ class Admin extends CI_Controller {
 
     /* GAMBAR HEADER */
 
+    function tampil_gambar(){
+        $id = $this->input->get('id_produk');
+        $gambar = $this->db->get_where('gambar', array('id_produk' => $id))->result_array();
+
+        $tampil = '';
+        
+        if(!empty($gambar)) {
+
+            foreach ($gambar as $g) {
+                $tampil .= '<div class="col-xs-6 col-md-3">';
+                $tampil .= '<a type="button" data-toggle="modal" class="thumbnail" data-target=".bs-example-modal-sm-hapus'.$g['id'].'">';
+                $tampil .= '<img src="'.base_url().'assets/gambar/'.$g['gambar'].'" class="img-responsive img-rounded">';
+                $tampil .= '</a></div>';
+            }
+
+        }
+
+        if(!empty($tampil)) {
+            print_r($tampil);
+        }
+    }
+
+    function hapus_gambar(){
+
+        $id_gambar = $this->input->get('id_gambar');
+        $gambar = $this->db->get_where('gambar', array('id' => $id_gambar))->result();
+
+        $this->db->delete('gambar', array('id' => $id_gambar));
+        $cek_gambar = $this->db->get_where('gambar', array('id' => $id_gambar))->result();
+
+        if(empty($cek_gambar)) {
+
+            unlink("./assets/gambar/".$gambar[0]->gambar);
+            $hasil = ['status' => true];
+
+            print_r($hasil);
+
+        } else {
+            
+            $hasil = ['status' => false];
+            print_r($hasil);
+
+        }
+
+    }
+
+    function pembeli(){
+        $data['halaman'] = 'Pembeli';
+        $this->db->order_by('id', 'desc');
+        $data['data_pembeli'] = $this->db->get('beli')->result();
+        $this->load->view('backend/pembeli', $data);
+    }
+
     /* HALAMAN TES */
 
     function tes(){
-        $data['halaman'] = 'Halaman tes';
-        // $this->load->view('backend/tes.php', $data);
-        // $data     = array('id_slide' => '2');
-        $data = 2;
-        $hasil = $this->m_slide->tampil_detail($data);
-        print_r($hasil);
+
+        if(!empty($this->input->post('nama')))  
+        {  
+            echo '<pre>';
+            print_r($_FILES['file']);
+
+        } else {
+
+            $this->load->view('backend/tes');
+
+        }
+
     }
 
 }

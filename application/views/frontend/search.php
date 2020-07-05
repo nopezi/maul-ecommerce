@@ -7,16 +7,16 @@
         <div class="col-12 col-md-6 col-lg-3 mt-3">
             <div class="card card-cascade">
                 <!-- Card image -->
-                <?php $gambar = explode(',', $dp->gambar); ?>
+                <?php //$gambar = explode(',', $dp->gambar); ?>
                 <div class="view view-cascade overlay">
                     <div id="carouselExampleControls<?=$dp->id_produk?>" class="carousel slide post-thumb" data-ride="carousel">
                         <div class="carousel-inner">
                             <div class="carousel-item active">
-                                <img class="d-block w-100" src="<?=base_url()?>assets/gambar/<?=$gambar[0]?>" alt="First slide" style="max-height: 200px; min-height: 200px">
+                                <img class="d-block w-100" src="<?=base_url()?>assets/gambar/<?=$dp->foto[0]?>" alt="First slide" style="max-height: 200px; min-height: 200px">
                             </div>
-                            <?php for($y=1; $y < sizeof($gambar); $y++): ?>
+                            <?php for($y=1; $y < sizeof($dp->foto); $y++): ?>
                             <div class="carousel-item">
-                                <img class="d-block w-100" src="<?=base_url()?>assets/gambar/<?=$gambar[$y]?>" alt="Second slide" style="max-height: 200px; min-height: 200px">
+                                <img class="d-block w-100" src="<?=base_url()?>assets/gambar/<?=$dp->foto[$y]?>" alt="Second slide" style="max-height: 200px; min-height: 200px">
                             </div>
                             <!-- <div class="carousel-item">
                                 <img class="d-block w-100" src="https://distrodakwah.id/assets/uploads/featured_image/utama/03phitam.jpg"

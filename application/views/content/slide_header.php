@@ -1,11 +1,11 @@
 <!--Carousel Wrapper-->
-<div id="carousel-example-1z" class="carousel slide carousel-fade" data-ride="carousel">
+<div id="carousel-example-1z" class="carousel slide carousel-multi-item" data-ride="carousel">
   <!--Indicators-->
   <ol class="carousel-indicators">
     <li data-target="#carousel-example-1z" data-slide-to="0" class="active"></li>
     <?php for($i=1; $i < sizeof($slide); $i++):?>
     <li data-target="#carousel-example-1z" data-slide-to="<?=$i?>"></li>
-    <?php endfor;?>
+    <?php endfor;?> 
     <!-- <li data-target="#carousel-example-1z" data-slide-to="2"></li> -->
   </ol>
   <!--/.Indicators-->

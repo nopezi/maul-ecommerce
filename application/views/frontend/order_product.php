@@ -1,3 +1,4 @@
+
 <div class="container-fluid" style="margin-top:80px">
     <div class="row">
         <div class="col-md-12">
@@ -19,40 +20,50 @@
                     Data Pembeli
                 </div>
                 <div class="card-body px-lg-5 pt-0">
-                    <form class="text-center" style="color: #757575;" action="#!">
+                    <form class="text-center" style="color: #757575;" action="<?=base_url('home/pesan')?>" method="post">
 
                       <div class="md-form">
-                        <input type="text" id="nama" class="form-control">
-                        <label for="nama">Nama Pembeli</label>
+                        <input type="text" id="nama_pembeli" name="nama_pembeli" class="form-control">
+                        <label for="nama_pembeli">Nama Pembeli</label>
                       </div>
 
                       <div class="md-form">
-                        <input type="text" id="no_hp" class="form-control">
+                        <input type="text" id="no_hp" name="no_hp" class="form-control">
                         <label for="no_hp">Nomor Hp</label>
                       </div>
 
                       <div class="md-form">
                         <!-- <input type="text" id="alamat" class="form-control"> -->
-                        <textarea class="md-textarea form-control" rows="3"></textarea>
+                        <textarea class="md-textarea form-control" id="alamat" name="alamat" rows="3"></textarea>
                         <label for="alamat">Alamat</label>
+                        <input type="hidden" name="produk" value="<?=$order['nama_produk']?>">
+                        <input type="hidden" name="warna" value="<?=$order['warna']?>">
+                        <input type="hidden" name="jumlah" value="<?=$order['jumlah']?>">
+                        <?php $ukuran = explode("*", $order['ukuran']); ?>
+                        <input type="hidden" name="ukuran" value="<?=$ukuran[1]?>">
+                        <?php
+                        if(!empty($order['harga_ukuran'])){
+                            $harga_ukuran = str_replace("Rp", "", $order['harga_ukuran']);
+                            $harga_ukuran = str_replace(",", "", $harga_ukuran);
+                            $harga_total  = $order['jumlah'] * $harga_ukuran;
+                            $harga = 'Rp '.number_format($harga_total);
+                        }else{ 
+                            $harga_ukuran = str_replace("Rp", "", $order['harga']);
+                            $harga_ukuran = str_replace(",", "", $harga_ukuran);
+                            $harga_total  = $order['jumlah'] * $harga_ukuran;
+                            $harga = 'Rp '.number_format($harga_total);
+                        }
+                        ?>
+                        <input type="hidden" name="harga" value="<?=$harga_total?>">
                       </div>
 
-                      <?php
-                        // $pesan = "Assalamualaikum kak, saya mau pesan ini \n*Nama Produk* : ".$order['nama_produk'];
-                        // $pesan .= " *Warna* : ".$order['warna']." *Ukuran* : ".$ukuran[1]." *Qty* ".$order['jumlah']."";
-                        $pesan = "Nama :   \n";
-                        $pesan .= "No Hp : \n";
-                        $pesan .= "Alamat : \n";
-                        $pesan .= "Keterangan : \n";
-                        $pesan .= "- Nama Produk\n";
-                        $pesan .= "- Warna\n";
-                        $pesan .= "- Ukuran\n";
-                        $pesan .= "- Belanja Berapa\n";
-                        ?>
-
-                    </form>
                 </div>
-                    <a href="https://api.whatsapp.com/send?phone=6281943214722&text=<?=urlencode($pesan)?>" target="_blank" class="btn btn-md btn-success card-footer"><i class="fab fa-whatsapp"></i> Pesan</a>
+
+                    <button class="btn btn-md btn-success card-footer" type="submit">
+                        Selanjutnya
+                    </button>
+                </form>
+                    
             </div>
         </div>
         <div class="col-12 col-md-6 col-lg-4">
@@ -113,8 +124,27 @@
 </div>
 
 <?php $this->load->view('content/footer'); ?>
+
+<script type="text/javascript">
+
+    tampil_tombol();
+    function tampil_tombol() {
+        var tombol = '<button class="btn btn-md btn-success card-footer" onclick="simpan_order()">' +
+                    '<i class="fab fa-whatsapp"></i> Pesan' +
+                '</button>';
+        // console.log(tombol);
+        $('#tombol-tampil').html(tombol);
+        // document.getElementById("tombol-tampil").innerHTML = '<button class="btn btn-md btn-success card-footer" onclick="simpan_order()"><i class="fab fa-whatsapp"></i> Pesan</button>';
+    }
+
+    function simpan_order() {
+        alert('masok');
+    }
+</script>
+
 <script type="text/javascript">
 $(document).ready(function(){
+
     $('#dtBasicExample').DataTable({
         "scrollX" : true,
         "searching": false,

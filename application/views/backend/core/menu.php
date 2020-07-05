@@ -5,22 +5,22 @@
             <div class="navbar-header">
                 <div class="top-left-part">
                     <!-- Logo -->
-                    <a class="logo" href="<?=base_url('admin')?>">
+                    <!-- <a class="logo" href="<?=base_url('admin')?>"> -->
                         <!-- Logo icon image, you can use font-icon also -->
-                        <b>
+                        <!-- <b> -->
                             <!--This is dark logo icon-->
-                            <img src="<?=base_url()?>assets/admin_template/plugins/images/admin-logo.png" alt="home" class="dark-logo" />
+                            <!-- <img src="<?=base_url()?>assets/admin_template/plugins/images/admin-logo.png" alt="home" class="dark-logo" /> -->
                             <!--This is light logo icon-->
-                            <img src="<?=base_url()?>assets/admin_template/plugins/images/admin-logo-dark.png" alt="home" class="light-logo" />
-                        </b>
+                            <!-- <img src="<?=base_url()?>assets/admin_template/plugins/images/admin-logo-dark.png" alt="home" class="light-logo" /> -->
+                        <!-- </b> -->
                         <!-- Logo text image you can use text also -->
-                        <span class="hidden-xs">
+                        <!-- <span class="hidden-xs"> -->
                             <!--This is dark logo text-->
-                            <img src="<?=base_url()?>assets/admin_template/plugins/images/admin-text.png" alt="home" class="dark-logo" />
+                            <!-- <img src="<?=base_url()?>assets/admin_template/plugins/images/admin-text.png" alt="home" class="dark-logo" /> -->
                             <!--This is light logo text-->
-                            <img src="<?=base_url()?>assets/admin_template/plugins/images/admin-text-dark.png" alt="home" class="light-logo" />
+                            <!-- <img src="<?=base_url()?>assets/admin_template/plugins/images/admin-text-dark.png" alt="home" class="light-logo" />
                         </span> 
-                    </a>
+                    </a> -->
                 </div>
                 <!-- /Logo -->
                 <ul class="nav navbar-top-links navbar-right pull-right">
@@ -59,6 +59,9 @@
                     </li>
                     <li>
                         <a href="<?=base_url('admin/produk')?>" class="waves-effect"><i class="fa fa-shopping-bag fa-fw" aria-hidden="true"></i>Produk</a>
+                    </li>
+                    <li>
+                        <a href="<?=base_url('admin/pembeli')?>" class="waves-effect"><i class="fa fa-suitcase fa-fw" aria-hidden="true"></i>Pembeli</a>
                     </li>
                     <li>
                         <a href="<?=base_url('admin/kategori')?>" class="waves-effect"><i class="fa fa-folder-open-o fa-fw" aria-hidden="true"></i>Kategori Produk</a>

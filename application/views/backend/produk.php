@@ -60,7 +60,7 @@
                                 </thead>
                                 <tbody>
                                 <?php foreach($data_produk as $dp): ?>
-                                <?php $gambar = explode(',', $dp->gambar); ?>
+                                    
                                     <tr class="white-box">
                                         <td>
                                             <a href="<?=base_url('home/detail')?>/<?=$dp->id_produk?>" target="_blank">
@@ -72,7 +72,7 @@
                                             <p><?=strtoupper($dp->ukuran)?></p>
                                         </td>
                                         <td>
-                                            <img class="img-thumbnail" src="<?=base_url()?>assets/gambar/<?=$gambar[0]?>" height="10px" width="100px">
+                                            <img class="img-thumbnail" src="<?=base_url()?>assets/gambar/<?=$dp->foto[0]?>" height="10px" width="100px">
                                         </td>
                                         <td>
                                             <a href="<?=base_url('admin/edit_produk')?>/<?=$dp->id_produk?>"><i class="fa fa-edit"></i></a>

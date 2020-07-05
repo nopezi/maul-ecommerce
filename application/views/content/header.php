@@ -16,6 +16,10 @@
     <link href="<?php echo base_url() ?>assets/css/style.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Roboto"rel="stylesheet">
     <link rel="stylesheet" href="<?=base_url()?>assets/css/styles.scss">
+
+    <link rel="stylesheet" type="text/css" href="<?=base_url()?>assets/slick/slick.css"/>
+  <link rel="stylesheet" type="text/css" href="<?=base_url()?>assets/slick/slick/slick-theme.css"/>
+
 </head>
 <body>
 
